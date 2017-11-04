@@ -3,8 +3,9 @@ package com.models;
 public class User {
 	String Name;
 	String Passwd;
-	String sex;
-	String head;
+	String sex;  
+	String head; //头像（使用连接地址）
+	
 	public String getName() {
 		return Name;
 	}
