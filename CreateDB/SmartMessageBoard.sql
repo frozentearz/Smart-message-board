@@ -1,16 +1,4 @@
--- 登陆数据库
--- $ mysql -u root
-
-use mysql;
-INSERT INTO user (
-    host, user, password, select_priv, insert_priv, update_priv, delete_priv, create_priv, drop_priv)
-    VALUES ('localhost', 'smart', PASSWORD('smart'), 'Y', 'Y', 'Y', 'Y', 'Y', 'Y');
-FLUSH PRIVILEGES;
-
---退出重新登陆数据库
---用 smart 登陆：
---$ mysql -u smart -p
-
+drop database if exists `smartboard`;
 create database smartboard;
 
 create table user(
@@ -28,5 +16,19 @@ create table Message(
     FOREIGN KEY (creatorID) REFERENCES user(UID)
 );
     
-show columns from user;
-show clomuns from message;
+--show columns from user;
+--show clomuns from message;
+
+--测试数据：
+insert into user(Uname, Usex, Uhead) values('Frazier', '男', 'https://avatars0.githubusercontent.com/u/18512486?s=460&v=4');
+insert into user(Uname, Usex, Uhead) values('Gavin', '男', 'https://avatars1.githubusercontent.com/u/32097717?s=460&v=4');
+insert into user(Uname, Usex, Uhead) values('tpof314', '男', 'https://avatars2.githubusercontent.com/u/999004?s=460&v=4');
+insert into user(Uname, Usex, Uhead) values('Yangying', '女', 'https://qlogo1.store.qq.com/qzone/1484137272/1484137272/50?1486689385');
+
+insert into Message(Message, createtime, creatorID) values('This is Frazier', now(), 1);
+insert into Message(Message, createtime, creatorID) values('This is Gavin', now(), 2);
+insert into Message(Message, createtime, creatorID) values('This is tpof314', sysdate(), 3);
+insert into Message(Message, createtime, creatorID) values('This is 杨莹', sysdate(), 4);
+
+
+
