@@ -8,5 +8,8 @@
 </head>
 <body>
 1234143
+
+<p>头像</p>
+<img src="<%=request.getContextPath()%>/img/avatar/avatar_01.jpg" />
 </body>
 </html>
