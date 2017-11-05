@@ -1,10 +1,10 @@
 package com.test;
 
+import com.controller.DBConnector;
+
 public class TestJDBC {
-
 	public static void main(String[] args) {
-		// TODO 自动生成的方法存根
-
+	    DBConnector db = new DBConnector();
+	   db.getConnection();
 	}
-
 }
