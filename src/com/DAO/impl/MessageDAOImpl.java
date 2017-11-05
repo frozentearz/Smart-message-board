@@ -5,6 +5,10 @@ import java.util.List;
 import com.DAO.MessageDAO;
 import com.models.Message;
 
+/**
+ * 这个文件的每个方法说明在com.DAO.MessageDAO中.
+ * @author Haojie
+ */
 public class MessageDAOImpl implements MessageDAO {
 
 	@Override

@@ -3,6 +3,10 @@ package com.DAO.impl;
 import com.DAO.*;
 import com.models.User;
 
+/**
+ * 这个文件的每个方法说明在com.DAO.UserDAO中.
+ * @author Haojie
+ */
 public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUser(int uid) {
