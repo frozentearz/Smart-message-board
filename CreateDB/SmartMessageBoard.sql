@@ -4,7 +4,7 @@ create database smartboard;
 create table user(
     UID int primary key AUTO_INCREMENT,
     Uname varchar(10) not null,
-    Usex varchar(2) check (Usex='男' or Usex='女'),
+    Usex varchar(1) check (Usex='M' or Usex='F'),
     Uhead varchar(500)
 );
 
@@ -20,10 +20,10 @@ create table Message(
 --show clomuns from message;
 
 --测试数据：
-insert into user(Uname, Usex, Uhead) values('Frazier', '男', 'https://avatars0.githubusercontent.com/u/18512486?s=460&v=4');
-insert into user(Uname, Usex, Uhead) values('Gavin', '男', 'https://avatars1.githubusercontent.com/u/32097717?s=460&v=4');
-insert into user(Uname, Usex, Uhead) values('tpof314', '男', 'https://avatars2.githubusercontent.com/u/999004?s=460&v=4');
-insert into user(Uname, Usex, Uhead) values('Yangying', '女', 'https://qlogo1.store.qq.com/qzone/1484137272/1484137272/50?1486689385');
+insert into user(Uname, Usex, Uhead) values('Frazier', 'M', 'https://avatars0.githubusercontent.com/u/18512486?s=460&v=4');
+insert into user(Uname, Usex, Uhead) values('Gavin', 'M', 'https://avatars1.githubusercontent.com/u/32097717?s=460&v=4');
+insert into user(Uname, Usex, Uhead) values('tpof314', 'M', 'https://avatars2.githubusercontent.com/u/999004?s=460&v=4');
+insert into user(Uname, Usex, Uhead) values('Yangying', 'F', 'https://qlogo1.store.qq.com/qzone/1484137272/1484137272/50?1486689385');
 
 insert into Message(Message, createtime, creatorID) values('This is Frazier', now(), 1);
 insert into Message(Message, createtime, creatorID) values('This is Gavin', now(), 2);
