@@ -11,24 +11,21 @@ public class DBConnector {
 	private static String password="smart";
 	static Connection conn;	
 	/**
-	 * Á¬½ÓÊı¾İ¿â
+	 * æ•°æ®åº“è¿æ¥
 	 * @author Gavin
-	 * Ê±¼ä 2017/11/3
-	 * version 1.0
+	 * æ—¶é—´:2017/11/5
 	 */
 	public static Connection getConnection(){
 		try {
 			Class.forName(driver);
-		    System.out.println("¼ÓÔØÇı¶¯³É¹¦");
-		    conn = DriverManager.getConnection(url, username, password);
-		    System.out.println("Êı¾İ¿âÁ¬½Ó³É¹¦");
+		    System.out.println("é©±åŠ¨åŠ è½½æˆåŠŸ");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			conn = DriverManager.getConnection(url, username, password);
-			System.out.println("Êı¾İ¿âÁ¬½Ó³É¹¦");
+			System.out.println("æ•°æ®åº“è¿æ¥æˆåŠŸ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
