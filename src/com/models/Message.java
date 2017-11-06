@@ -6,7 +6,7 @@ public class Message {
 	private int mid;
 	private String topic;
 	private Date createtime;
-	private String creator;
+	private User creator;
 	
 	public Message() {
 		
@@ -32,10 +32,10 @@ public class Message {
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
-	public String getCreator() {
+	public User getCreator() {
 		return creator;
 	}
-	public void setCreator(String creator) {
+	public void setCreator(User creator) {
 		this.creator = creator;
 	}
 

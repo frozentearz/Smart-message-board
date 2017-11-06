@@ -1,6 +1,12 @@
 package com.DAO.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.DAO.*;
+import com.controller.DBConnector;
 import com.models.User;
 
 /**
@@ -8,10 +14,29 @@ import com.models.User;
  * @author Haojie
  */
 public class UserDAOImpl implements UserDAO {
+	DBConnector db = new DBConnector();
+	Connection conn = db.getConnection();
+	
 	@Override
 	public User getUser(int uid) {
 		// TODO
-		return null;
+		String sql = "select * from user where uid = ?";
+		User u = new User();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, String.valueOf(uid));
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				u.setName(rs.getString("Uname"));
+				u.setPasswd(rs.getString("Upasswd"));
+				u.setSex(rs.getString("Usex"));
+				u.setHead(rs.getString("Uhead"));
+			}
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return u;
 	}
 	
 	@Override
