@@ -47,4 +47,10 @@ public class MessageDAOImpl implements MessageDAO {
 		return false;
 	}
 
+	@Override
+	public int countTotalMessages() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

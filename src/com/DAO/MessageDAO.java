@@ -53,4 +53,9 @@ public interface MessageDAO {
 	 */
 	public boolean addMessage(Message message);
 	
+	/**
+	 * 统计一下整个数据库一共有多少条消息.
+	 * @return 数据库总共的消息数量.
+	 */
+	public int countTotalMessages();
 }
