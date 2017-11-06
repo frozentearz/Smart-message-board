@@ -46,8 +46,27 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO
-		
-		return null;
+		String sql = "select * from user where Uname = ?";
+		User u = new User();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				while (rs.next()) {
+					u.setName(rs.getString("Uname"));
+					u.setPasswd(rs.getString("Upasswd"));
+					u.setSex(rs.getString("Usex"));
+					u.setHead(rs.getString("Uhead"));
+				}
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return u;
 	}
 	
 	@Override
