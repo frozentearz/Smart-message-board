@@ -20,19 +20,17 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUser(int uid) {
 		// TODO
-		String sql = "select * from user where uid = ?";
+		String sql = "select * from user where uid = ?;";
 		User u = new User();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, String.valueOf(uid));
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				while (rs.next()) {
-					u.setName(rs.getString("Uname"));
-					u.setPasswd(rs.getString("Upasswd"));
-					u.setSex(rs.getString("Usex"));
-					u.setHead(rs.getString("Uhead"));
-				}
+				u.setName(rs.getString("Uname"));
+				u.setPasswd(rs.getString("Upasswd"));
+				u.setSex(rs.getString("Usex"));
+				u.setHead(rs.getString("Uhead"));
 			} else {
 				return null;
 			}
@@ -46,19 +44,17 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO
-		String sql = "select * from user where Uname = ?";
+		String sql = "select * from user where Uname = ?;";
 		User u = new User();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				while (rs.next()) {
-					u.setName(rs.getString("Uname"));
-					u.setPasswd(rs.getString("Upasswd"));
-					u.setSex(rs.getString("Usex"));
-					u.setHead(rs.getString("Uhead"));
-				}
+				u.setUid(rs.getInt("UID"));
+				u.setPasswd(rs.getString("Upasswd"));
+				u.setSex(rs.getString("Usex"));
+				u.setHead(rs.getString("Uhead"));
 			} else {
 				return null;
 			}
@@ -72,12 +68,46 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean updateUser(User user) {
 		// TODO
-		return false;
+		boolean flag = false;
+		String sql = "update user set Uname = ?, Upasswd = ?, Usex = ?, Uhead = ? where UID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getPasswd());
+			pstmt.setString(3, user.getSex());
+			pstmt.setString(4, user.getHead());
+			pstmt.setInt(5, user.getUid());
+			if (pstmt.executeUpdate()>0) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			flag = false;
+		}
+		return flag;
 	}
 	
 	@Override
 	public boolean addUser(User user) {
 		// TODO
-		return false;
+		String sql = "insert into user(UID, Uname, Upasswd, Usex, Uhead) values(?, ?, ?, ?, ?);";
+		boolean flag = false;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, user.getUid());
+			pstmt.setString(2, user.getName());
+			pstmt.setString(3, user.getPasswd());
+			pstmt.setString(4, user.getSex());
+			pstmt.setString(5, user.getHead());
+			if (pstmt.executeUpdate()>0) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			flag = false;
+		}
+		return flag;
 	}
 }

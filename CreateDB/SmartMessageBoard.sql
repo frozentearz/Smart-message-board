@@ -1,15 +1,16 @@
 drop database if exists `smartboard`;
 create database smartboard;
+use smartboard;
 
 create table user(
     UID int primary key AUTO_INCREMENT,
     Uname varchar(10) not null,
-    Upasswd varchar(20) not null,
-    Usex varchar(1) check (Usex='M' or Usex='F'),
+    Upasswd varchar(25) not null,
+    Usex char(1) check (Usex='M' or Usex='F'),
     Uhead varchar(500)
 );
 
-create table Message(
+create table message(
     MID int primary key AUTO_INCREMENT,
     Message text not null,
     createtime datetime not null,
@@ -26,10 +27,10 @@ insert into user(Uname, Upasswd, Usex, Uhead) values('Gavin', PASSWORD('Gavin'),
 insert into user(Uname, Upasswd, Usex, Uhead) values('tpof314', PASSWORD('tpof314'), 'M', 'https://avatars2.githubusercontent.com/u/999004?s=460&v=4');
 insert into user(Uname, Upasswd, Usex, Uhead) values('Yangying', PASSWORD('Yangying'), 'F', 'https://qlogo1.store.qq.com/qzone/1484137272/1484137272/50?1486689385');
 
-insert into Message(Message, createtime, creatorID) values('This is Frazier', now(), 1);
-insert into Message(Message, createtime, creatorID) values('This is Gavin', now(), 2);
-insert into Message(Message, createtime, creatorID) values('This is tpof314', sysdate(), 3);
-insert into Message(Message, createtime, creatorID) values('This is 杨莹', sysdate(), 4);
+insert into message(Message, createtime, creatorID) values('This is Frazier', now(), 1);
+insert into message(Message, createtime, creatorID) values('This is Gavin', now(), 2);
+insert into message(Message, createtime, creatorID) values('This is tpof314', sysdate(), 3);
+insert into message(Message, createtime, creatorID) values('This is 杨莹', sysdate(), 4);
 
 
 
