@@ -26,11 +26,15 @@ public class UserDAOImpl implements UserDAO {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, String.valueOf(uid));
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				u.setName(rs.getString("Uname"));
-				u.setPasswd(rs.getString("Upasswd"));
-				u.setSex(rs.getString("Usex"));
-				u.setHead(rs.getString("Uhead"));
+			if (rs.next()) {
+				while (rs.next()) {
+					u.setName(rs.getString("Uname"));
+					u.setPasswd(rs.getString("Upasswd"));
+					u.setSex(rs.getString("Usex"));
+					u.setHead(rs.getString("Uhead"));
+				}
+			} else {
+				return null;
 			}
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
@@ -42,6 +46,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO
+		
 		return null;
 	}
 	
