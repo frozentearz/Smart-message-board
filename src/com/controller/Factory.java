@@ -106,7 +106,7 @@ public class Factory {
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
 		MessageDAOImpl mdi=new MessageDAOImpl();	
-		List<Message> list=mdi.getMessages(n==1?n:n+1, n*10);
+		List<Message> list=mdi.getMessages(n==1?n:n*10+1, n+19);
 		return list;
 	}
 	
