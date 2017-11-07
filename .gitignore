@@ -1,5 +1,4 @@
 .classpath
-.settings/
 build/
 **/*.class
 .DS_Store
