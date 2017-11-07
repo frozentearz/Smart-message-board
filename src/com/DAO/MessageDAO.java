@@ -1,7 +1,7 @@
-package com.DAO;
+package src.com.DAO;
 import java.util.List;
 
-import com.models.Message;
+import src.com.models.Message;
 
 /**
  * 不要修改这个文件的任何内容。这个文件里面的代码，请写到com.DAO.impl.UserMessageImpl里面.

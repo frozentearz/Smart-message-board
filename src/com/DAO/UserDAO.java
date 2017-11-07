@@ -1,6 +1,6 @@
-package com.DAO;
+package src.com.DAO;
 
-import com.models.User;
+import src.com.models.User;
 
 /**
  * 不要修改这个文件的任何内容。这个文件里面的代码，请写到com.DAO.impl.UserDAOImpl里面.

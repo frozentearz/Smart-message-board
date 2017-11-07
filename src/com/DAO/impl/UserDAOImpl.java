@@ -1,13 +1,15 @@
-package com.DAO.impl;
+package src.com.DAO.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.DAO.*;
-import com.controller.DBConnector;
-import com.models.User;
+import src.com.DAO.*;
+import src.com.controller.DBConnector;
+import src.com.models.User;
+
+import src.com.DAO.UserDAO;
 
 /**
  * 这个文件的每个方法说明在com.DAO.UserDAO中.

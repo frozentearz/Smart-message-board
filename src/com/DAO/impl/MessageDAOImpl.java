@@ -1,9 +1,9 @@
-package com.DAO.impl;
+package src.com.DAO.impl;
 
 import java.util.List;
 
-import com.DAO.MessageDAO;
-import com.models.Message;
+import src.com.DAO.MessageDAO;
+import src.com.models.Message;
 
 /**
  * 这个文件的每个方法说明在com.DAO.MessageDAO中.

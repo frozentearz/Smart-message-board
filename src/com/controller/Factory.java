@@ -1,13 +1,13 @@
-package com.controller;
+package src.com.controller;
 
 import java.util.List;
 
-import com.DAO.MessageDAO;
-import com.DAO.UserDAO;
-import com.DAO.impl.MessageDAOImpl;
-import com.DAO.impl.UserDAOImpl;
-import com.models.Message;
-import com.models.User;
+import src.com.DAO.MessageDAO;
+import src.com.DAO.UserDAO;
+import src.com.DAO.impl.MessageDAOImpl;
+import src.com.DAO.impl.UserDAOImpl;
+import src.com.models.Message;
+import src.com.models.User;
 
 /**
  * 抽象工厂.
@@ -32,9 +32,14 @@ public class Factory {
 	 * @param passowrd 密码.
 	 * @return 成功的话，返回一个完整的User对象. 否则返回null.
 	 */
-	public User login(String username, String passowrd) {
+	public User login(String username, String password) {
 		// TODO
-		return null;
+		UserDAOImpl udi=new UserDAOImpl();
+		User u=udi.getUserByUsername(username);
+		if( !( username.equals(u.getName() ) && password.equals(u.getPasswd() ) ) ) {
+			return null;
+		}
+		return u;
 	}
 	
 	/**
@@ -46,7 +51,14 @@ public class Factory {
 	 */
 	public User registerUser(User user) {
 		// TODO
-		return null;
+		UserDAOImpl udi=new UserDAOImpl();
+		if(udi.getUserByUsername(user.getName())==null
+				&& !(user.getPasswd().length()>5 && user.getPasswd().length()<=15)) {
+			
+			return null;
+		}
+		udi.addUser(user);
+		return user;
 	}
 	
 	/**
@@ -56,7 +68,9 @@ public class Factory {
 	 */
 	public User getUserProfile(int userid) {
 		// TODO
-		return null;
+		UserDAOImpl udi=new UserDAOImpl();
+		User u=udi.getUser(userid);
+		return u;
 	}
 	
 	/**
@@ -66,7 +80,9 @@ public class Factory {
 	 */
 	public Message getMessage(int mid) {
 		// TODO
-		return null;
+		MessageDAOImpl mdi=new MessageDAOImpl();
+		Message m=mdi.getMessage(mid);
+		return m;
 	}
 
 	/**
@@ -76,7 +92,8 @@ public class Factory {
 	 */
 	public Message updateMessage(Message message) {
 		// TODO
-		return null;
+		MessageDAOImpl mdi=new MessageDAOImpl();
+		return mdi.updateMessage(message)?message:null;
 	}
 	
 	/**
@@ -88,7 +105,9 @@ public class Factory {
 	 */
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
-		return null;
+		MessageDAOImpl mdi=new MessageDAOImpl();	
+		List<Message> list=mdi.getMessages(n==1?n:n+1, n*10);
+		return list;
 	}
 	
 	/**
@@ -97,7 +116,8 @@ public class Factory {
 	 */
 	public int countTotalMessages() {
 		// TODO
-		return 0;
+		MessageDAOImpl mdi=new MessageDAOImpl();
+		return mdi.countTotalMessages();
 	}
 	
 	/**
@@ -106,7 +126,8 @@ public class Factory {
 	 */
 	public int countTotalPages() {
 		// TODO
-		return 0;
+		MessageDAOImpl mdi=new MessageDAOImpl();	
+		return  countTotalMessages()%20==0?countTotalMessages()/20:(countTotalMessages()/20)+1;
 	}
 	
 }
