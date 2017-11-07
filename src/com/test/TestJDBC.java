@@ -1,6 +1,6 @@
-package src.com.test;
+package com.test;
 
-import src.com.controller.DBConnector;
+import com.controller.DBConnector;
 
 public class TestJDBC {
 	public static void main(String[] args) {

@@ -1,13 +1,13 @@
-package src.com.controller;
+package com.controller;
 
 import java.util.List;
 
-import src.com.DAO.MessageDAO;
-import src.com.DAO.UserDAO;
-import src.com.DAO.impl.MessageDAOImpl;
-import src.com.DAO.impl.UserDAOImpl;
-import src.com.models.Message;
-import src.com.models.User;
+import com.DAO.MessageDAO;
+import com.DAO.UserDAO;
+import com.DAO.impl.MessageDAOImpl;
+import com.DAO.impl.UserDAOImpl;
+import com.models.Message;
+import com.models.User;
 
 /**
  * 抽象工厂.

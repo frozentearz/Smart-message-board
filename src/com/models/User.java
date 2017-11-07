@@ -1,4 +1,4 @@
-package src.com.models;
+package com.models;
 
 public class User {
 	private int uid;

@@ -1,7 +1,7 @@
-package src.com.test;
+package com.test;
 
-import src.com.DAO.impl.UserDAOImpl;
-import src.com.models.User;
+import com.DAO.impl.UserDAOImpl;
+import com.models.User;
 
 /**
  * @author Frazier
