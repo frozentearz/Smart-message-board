@@ -22,10 +22,10 @@ create table message(
 --show clomuns from message;
 
 --测试数据：
-insert into user(Uname, Upasswd, Usex, Uhead) values('Frazier', PASSWORD('Frazier'), 'M', 'https://avatars0.githubusercontent.com/u/18512486?s=460&v=4');
-insert into user(Uname, Upasswd, Usex, Uhead) values('Gavin', PASSWORD('Gavin'), 'M', 'https://avatars1.githubusercontent.com/u/32097717?s=460&v=4');
-insert into user(Uname, Upasswd, Usex, Uhead) values('tpof314', PASSWORD('tpof314'), 'M', 'https://avatars2.githubusercontent.com/u/999004?s=460&v=4');
-insert into user(Uname, Upasswd, Usex, Uhead) values('Yangying', PASSWORD('Yangying'), 'F', 'https://qlogo1.store.qq.com/qzone/1484137272/1484137272/50?1486689385');
+insert into user(Uname, Upasswd, Usex, Uhead) values('Frazier', 'Frazier', 'M', 'https://avatars0.githubusercontent.com/u/18512486?s=460&v=4');
+insert into user(Uname, Upasswd, Usex, Uhead) values('Gavin', 'Gavin', 'M', 'https://avatars1.githubusercontent.com/u/32097717?s=460&v=4');
+insert into user(Uname, Upasswd, Usex, Uhead) values('tpof314','tpof314', 'M', 'https://avatars2.githubusercontent.com/u/999004?s=460&v=4');
+insert into user(Uname, Upasswd, Usex, Uhead) values('Yangying', 'Yangying', 'F', 'https://qlogo1.store.qq.com/qzone/1484137272/1484137272/50?1486689385');
 
 insert into message(Message, createtime, creatorID) values('This is Frazier', now(), 1);
 insert into message(Message, createtime, creatorID) values('This is Gavin', now(), 2);
