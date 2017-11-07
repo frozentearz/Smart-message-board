@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Message {
 	private int mid;
-	private String topic;
+	private String message;
 	private Date createtime;
 	private User creator;
 	
@@ -19,13 +19,15 @@ public class Message {
 	public void setMid(int mid) {
 		this.mid = mid;
 	}
+	
+	public String getMessage() {
+		return message;
+	}
 
-	public String getTopic() {
-		return topic;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
+
 	public Date getCreatetime() {
 		return createtime;
 	}
@@ -41,7 +43,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [mid=" + mid + ", topic=" + topic + ", createtime=" + createtime + ", creator=" + creator + "]";
+		return "Message [mid=" + mid + ", topic=" + message + ", createtime=" + createtime + ", creator=" + creator + "]";
 	}
 
 }

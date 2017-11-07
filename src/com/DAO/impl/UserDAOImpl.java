@@ -112,15 +112,14 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean addUser(User user) {
 		// TODO
-		String sql = "insert into user(UID, Uname, Upasswd, Usex, Uhead) values(?, ?, ?, ?, ?);";
+		String sql = "insert into user(Uname, Upasswd, Usex, Uhead) values(?, ?, ?, ?);";
 		boolean flag = false;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, user.getUid());
-			pstmt.setString(2, user.getName());
-			pstmt.setString(3, user.getPasswd());
-			pstmt.setString(4, user.getSex());
-			pstmt.setString(5, user.getHead());
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getPasswd());
+			pstmt.setString(3, user.getSex());
+			pstmt.setString(4, user.getHead());
 			if (pstmt.executeUpdate()>0) {
 				flag = true;
 			}
