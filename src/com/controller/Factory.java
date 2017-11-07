@@ -20,7 +20,8 @@ public class Factory {
 	
 	private UserDAO userDAO;
 	private MessageDAO messageDAO;
-	
+	private UserDAOImpl udi=new UserDAOImpl();
+	private MessageDAOImpl mdi=new MessageDAOImpl();
 	public Factory() {
 		this.userDAO = new UserDAOImpl();
 		this.messageDAO = new MessageDAOImpl();
@@ -34,7 +35,7 @@ public class Factory {
 	 */
 	public User login(String username, String password) {
 		// TODO
-		UserDAOImpl udi=new UserDAOImpl();
+//		UserDAOImpl udi=new UserDAOImpl();
 		User u=udi.getUserByUsername(username);
 		if( !( username.equals(u.getName() ) && password.equals(u.getPasswd() ) ) ) {
 			return null;
@@ -51,14 +52,13 @@ public class Factory {
 	 */
 	public User registerUser(User user) {
 		// TODO
-		UserDAOImpl udi=new UserDAOImpl();
+//		UserDAOImpl udi=new UserDAOImpl();
 		if(udi.getUserByUsername(user.getName())==null
 				&& !(user.getPasswd().length()>5 && user.getPasswd().length()<=15)) {
 			
 			return null;
 		}
-		udi.addUser(user);
-		return user;
+		return udi.addUser(user)?user:null;
 	}
 	
 	/**
@@ -68,9 +68,8 @@ public class Factory {
 	 */
 	public User getUserProfile(int userid) {
 		// TODO
-		UserDAOImpl udi=new UserDAOImpl();
-		User u=udi.getUser(userid);
-		return u;
+//		UserDAOImpl udi=new UserDAOImpl();
+		return udi.getUser(userid);
 	}
 	
 	/**
@@ -80,9 +79,8 @@ public class Factory {
 	 */
 	public Message getMessage(int mid) {
 		// TODO
-		MessageDAOImpl mdi=new MessageDAOImpl();
-		Message m=mdi.getMessage(mid);
-		return m;
+//		MessageDAOImpl mdi=new MessageDAOImpl();
+		return mdi.getMessage(mid);
 	}
 
 	/**
@@ -92,7 +90,7 @@ public class Factory {
 	 */
 	public Message updateMessage(Message message) {
 		// TODO
-		MessageDAOImpl mdi=new MessageDAOImpl();
+//		MessageDAOImpl mdi=new MessageDAOImpl();
 		return mdi.updateMessage(message)?message:null;
 	}
 	
@@ -105,9 +103,8 @@ public class Factory {
 	 */
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
-		MessageDAOImpl mdi=new MessageDAOImpl();	
-		List<Message> list=mdi.getMessages(n==1?n:n*10+1, n*10+19);
-		return list;
+//		MessageDAOImpl mdi=new MessageDAOImpl();	
+		return mdi.getMessages(n==1?n:n*10+1, n*10+19);
 	}
 	
 	/**
@@ -116,7 +113,7 @@ public class Factory {
 	 */
 	public int countTotalMessages() {
 		// TODO
-		MessageDAOImpl mdi=new MessageDAOImpl();
+//		MessageDAOImpl mdi=new MessageDAOImpl();
 		return mdi.countTotalMessages();
 	}
 	
@@ -126,7 +123,7 @@ public class Factory {
 	 */
 	public int countTotalPages() {
 		// TODO
-		MessageDAOImpl mdi=new MessageDAOImpl();	
+//		MessageDAOImpl mdi=new MessageDAOImpl();	
 		return  countTotalMessages()%20==0?countTotalMessages()/20:(countTotalMessages()/20)+1;
 	}
 	
