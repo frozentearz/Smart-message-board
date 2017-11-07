@@ -35,10 +35,11 @@ public class Factory {
 	public User login(String username, String password) {
 		// TODO
 		User u=userDAO.getUserByUsername(username);
-		if( !( username.equals(u.getName() ) && password.equals(u.getPasswd() ) ) ) {
+		if(u != null && username.equals(u.getName()) && password.equals(u.getPasswd())) {
+			return u;
+		} else {
 			return null;
 		}
-		return u;
 	}
 	
 	/**
@@ -52,7 +53,6 @@ public class Factory {
 		// TODO
 		if(userDAO.getUserByUsername(user.getName())==null
 				&& !(user.getPasswd().length()>5 && user.getPasswd().length()<=15)) {
-			
 			return null;
 		}
 		return userDAO.addUser(user)?user:null;
