@@ -17,18 +17,18 @@ import com.DAO.*;
 public class UserDAOImpl implements UserDAO {
 	DBConnector db = new DBConnector();
 	Connection conn = DBConnector.getConnection();
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
 	
 	@Override
 	public User getUser(int uid) {
 		// TODO
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql = "select * from user where uid = ?;";
 		User u = new User();
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, String.valueOf(uid));
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				u.setName(rs.getString("Uname"));
 				u.setPasswd(rs.getString("Upasswd"));
@@ -55,6 +55,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		String sql = "select * from user where Uname = ?;";
 		User u = new User();
 		try {
@@ -87,10 +89,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean updateUser(User user) {
 		// TODO
+		PreparedStatement pstmt = null;
 		boolean flag = false;
 		String sql = "update user set Uname = ?, Upasswd = ?, Usex = ?, Uhead = ? where UID = ?;";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getPasswd());
 			pstmt.setString(3, user.getSex());
@@ -104,6 +107,12 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 			flag = false;
 		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 			db.closeConnection();
 		}
 		return flag;
@@ -112,10 +121,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean addUser(User user) {
 		// TODO
+		PreparedStatement pstmt = null;
 		String sql = "insert into user(Uname, Upasswd, Usex, Uhead) values(?, ?, ?, ?);";
 		boolean flag = false;
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getPasswd());
 			pstmt.setString(3, user.getSex());
@@ -128,6 +138,12 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 			flag = false;
 		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 			db.closeConnection();
 		}
 		return flag;

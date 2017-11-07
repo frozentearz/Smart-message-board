@@ -43,7 +43,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [mid=" + mid + ", topic=" + message + ", createtime=" + createtime + ", creator=" + creator + "]";
+		return "Message [mid=" + mid + ", message=" + message + ", createtime=" + createtime + ", creator=" + creator + "]";
 	}
 
 }
