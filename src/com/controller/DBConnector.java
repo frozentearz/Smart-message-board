@@ -31,5 +31,14 @@ public class DBConnector {
 			e.printStackTrace();
 		}
 		return conn;
-	}	
+	}
+	
+	public void closeConnection() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
 }

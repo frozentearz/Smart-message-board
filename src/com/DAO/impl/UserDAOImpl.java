@@ -16,7 +16,9 @@ import com.DAO.*;
  */
 public class UserDAOImpl implements UserDAO {
 	DBConnector db = new DBConnector();
-	Connection conn = db.getConnection();
+	Connection conn = DBConnector.getConnection();
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 	
 	@Override
 	public User getUser(int uid) {
@@ -38,6 +40,14 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 		}
 		return u;
 	}
@@ -48,9 +58,9 @@ public class UserDAOImpl implements UserDAO {
 		String sql = "select * from user where Uname = ?;";
 		User u = new User();
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				u.setUid(rs.getInt("UID"));
 				u.setPasswd(rs.getString("Upasswd"));
@@ -62,6 +72,14 @@ public class UserDAOImpl implements UserDAO {
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 		}
 		return u;
 	}
@@ -85,6 +103,8 @@ public class UserDAOImpl implements UserDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
+		} finally {
+			db.closeConnection();
 		}
 		return flag;
 	}
@@ -108,6 +128,8 @@ public class UserDAOImpl implements UserDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 			flag = false;
+		} finally {
+			db.closeConnection();
 		}
 		return flag;
 	}
