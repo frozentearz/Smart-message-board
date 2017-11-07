@@ -97,7 +97,7 @@ public class Factory {
 	 */
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
-		return messageDAO.getMessages(n==1?n:n*10+1, n==1?(n+19):(n*10+19));
+		return messageDAO.getMessages(n==1?n:n*10+1, n==1?(n+19):(n*10+20));
 	}
 	
 	/**
