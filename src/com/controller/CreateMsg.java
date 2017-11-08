@@ -37,7 +37,7 @@ public class CreateMsg extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String message=request.getParameter("message");
-		String creator=request.getParameter("creator");//
+		String creator=request.getParameter("creator");   //...
 		Date createTime=new Date();
 		
 		Message m=new Message();
@@ -46,7 +46,7 @@ public class CreateMsg extends HttpServlet {
 		//m.setCreator(creator);
 		
 		if(factory.createMessage(m)!=null) {
-			response.sendRedirect("/index.jsp"); //
+			response.sendRedirect("/index.jsp");   //...
 		}
 
 	}
