@@ -23,8 +23,8 @@ public class UserDAOImpl implements UserDAO {
 		// TODO
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from user where uid = ?;";
 		User u = new User();
+		String sql = "select * from user where uid = ?;";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, String.valueOf(uid));
@@ -57,8 +57,8 @@ public class UserDAOImpl implements UserDAO {
 		// TODO
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from user where Uname = ?;";
 		User u = new User();
+		String sql = "select * from user where Uname = ?;";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);

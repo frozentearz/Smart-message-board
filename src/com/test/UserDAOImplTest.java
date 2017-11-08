@@ -25,7 +25,7 @@ public class UserDAOImplTest {
 	private static void GetUserTest() {
 		// TODO 自动生成的方法存根
 		User u = new User();
-		u = uDAOImpl.getUser(1);
+		u = uDAOImpl.getUser(1); 
 		if (u != null) {
 			System.out.println(u.getName());
 			System.out.println(u.getPasswd());
