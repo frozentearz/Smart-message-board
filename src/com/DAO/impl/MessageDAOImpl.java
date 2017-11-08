@@ -21,7 +21,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public Message getMessage(int mid) {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -46,11 +45,11 @@ public class MessageDAOImpl implements MessageDAO {
 			try {
 				rs.close();
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		   return m;
 	}
@@ -58,7 +57,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getMessages(int offset, int amount) {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -85,11 +83,11 @@ public class MessageDAOImpl implements MessageDAO {
 			try {
 				rs.close();
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return list;
 	}
@@ -97,7 +95,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getMessages(int userId, int offset, int amount) {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -125,11 +122,11 @@ public class MessageDAOImpl implements MessageDAO {
 			try {
 				rs.close();
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return list;
 	}
@@ -137,7 +134,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public boolean deleteMessage(int mid) {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="delete message where MID=?";
@@ -151,11 +147,11 @@ public class MessageDAOImpl implements MessageDAO {
 		} finally {
 			try {
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return true;
 	}
@@ -163,7 +159,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public boolean updateMessage(Message message) {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="update message set message=?,createtime=? where MID=?";
@@ -181,11 +176,11 @@ public class MessageDAOImpl implements MessageDAO {
 		} finally {
 			try {
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return true;
 	}
@@ -193,7 +188,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public boolean addMessage(Message message) {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="insert into message(message, createtime, creatorID) values(?,?,?)";
@@ -211,11 +205,11 @@ public class MessageDAOImpl implements MessageDAO {
 		} finally {
 			try {
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return true;
 	}
@@ -223,7 +217,6 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public int countTotalMessages() {
 		// TODO Auto-generated method stub
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -242,11 +235,11 @@ public class MessageDAOImpl implements MessageDAO {
 			try {
 				rs.close();
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return countTotal;
 	}

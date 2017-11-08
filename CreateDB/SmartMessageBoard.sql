@@ -6,7 +6,7 @@ create table user(
     UID int primary key AUTO_INCREMENT,
     Uname varchar(10) not null,
     Upasswd varchar(25) not null,
-    Usex char(1) check (Usex='M' or Usex='F'),
+    Usex char(1) check (Usex='M' or Usex='F') not null,
     Uhead varchar(500)
 );
 

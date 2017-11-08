@@ -19,7 +19,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUser(int uid) {
 		// TODO
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -44,6 +43,7 @@ public class UserDAOImpl implements UserDAO {
 			try {
 				rs.close();
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
@@ -55,7 +55,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -80,6 +79,7 @@ public class UserDAOImpl implements UserDAO {
 			try {
 				rs.close();
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
@@ -91,7 +91,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean updateUser(User user) {
 		// TODO
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		boolean flag = false;
@@ -113,11 +112,11 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			try {
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return flag;
 	}
@@ -125,7 +124,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean addUser(User user) {
 		// TODO
-		DBConnector db = new DBConnector();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "insert into user(Uname, Upasswd, Usex, Uhead) values(?, ?, ?, ?);";
@@ -146,11 +144,11 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			try {
 				pstmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			db.closeConnection();
 		}
 		return flag;
 	}
