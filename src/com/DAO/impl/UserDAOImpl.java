@@ -15,12 +15,12 @@ import com.DAO.*;
  * @author Haojie
  */
 public class UserDAOImpl implements UserDAO {
-	DBConnector db = new DBConnector();
-	Connection conn = DBConnector.getConnection();
 	
 	@Override
 	public User getUser(int uid) {
 		// TODO
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User u = new User();
@@ -55,6 +55,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserByUsername(String username) {
 		// TODO
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User u = new User();
@@ -89,6 +91,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean updateUser(User user) {
 		// TODO
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		boolean flag = false;
 		String sql = "update user set Uname = ?, Upasswd = ?, Usex = ?, Uhead = ? where UID = ?;";
@@ -121,6 +125,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean addUser(User user) {
 		// TODO
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql = "insert into user(Uname, Upasswd, Usex, Uhead) values(?, ?, ?, ?);";
 		boolean flag = false;

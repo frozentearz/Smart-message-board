@@ -17,12 +17,12 @@ import com.models.*;
  * @author Haojie
  */
 public class MessageDAOImpl implements MessageDAO {
-	DBConnector db = new DBConnector();
-	Connection conn = db.getConnection();
 	
 	@Override
 	public Message getMessage(int mid) {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * from message where mid = ?;";
@@ -58,6 +58,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getMessages(int offset, int amount) {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="select top 20 * from message where MID between ? and ?";
@@ -95,6 +97,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public List<Message> getMessages(int userId, int offset, int amount) {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="select top 20 * from message where ceratorID=? and ( MID between ? and ?)";
@@ -133,6 +137,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public boolean deleteMessage(int mid) {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="delete message where MID=?";
 		try {
@@ -157,6 +163,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public boolean updateMessage(Message message) {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="update message set message=?,createtime=? where MID=?";
 		try {
@@ -185,6 +193,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public boolean addMessage(Message message) {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="insert into message(message, createtime, creatorID) values(?,?,?)";
 		try {
@@ -213,6 +223,8 @@ public class MessageDAOImpl implements MessageDAO {
 	@Override
 	public int countTotalMessages() {
 		// TODO Auto-generated method stub
+		DBConnector db = new DBConnector();
+		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int countTotal=0;
