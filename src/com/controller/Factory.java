@@ -51,11 +51,17 @@ public class Factory {
 	 */
 	public User registerUser(User user) {
 		// TODO
+		//对用户名和密码进行检验
 		if(userDAO.getUserByUsername(user.getName())==null
 				&& !(user.getPasswd().length()>5 && user.getPasswd().length()<=15)) {
 			return null;
 		}
-		return userDAO.addUser(user)?user:null;
+		//判断是否添加用户成功
+		if(userDAO.addUser(user)) 
+			return user;
+		else 
+			return null;
+		
 	}
 	
 	/**
@@ -66,6 +72,18 @@ public class Factory {
 	public User getUserProfile(int userid) {
 		// TODO
 		return userDAO.getUser(userid);
+	}
+	
+	/**
+	 * 在数据库中插入一条消息
+	 * @param message 新的消息
+	 * @return 插入的消息
+	 */
+	public Message createMessage(Message message) {
+		if(messageDAO.addMessage(message))
+			return message;
+		else
+			return null;
 	}
 	
 	/**
@@ -85,7 +103,10 @@ public class Factory {
 	 */
 	public Message updateMessage(Message message) {
 		// TODO
-		return messageDAO.updateMessage(message)?message:null;
+		if(messageDAO.updateMessage(message))
+			return message;
+		else 
+			return null;
 	}
 	
 	/**
@@ -97,7 +118,9 @@ public class Factory {
 	 */
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
-		return messageDAO.getMessages(n==1?n:n*10+1, n==1?(n+19):(n*10+20));
+		int star=n==1?n:n*10+1;
+		int end=n==1?(n+19):(n*10+20);
+		return messageDAO.getMessages(star,end );
 	}
 	
 	/**
@@ -115,7 +138,10 @@ public class Factory {
 	 */
 	public int countTotalPages() {
 		// TODO	
-		return  countTotalMessages()%20==0?countTotalMessages()/20:(countTotalMessages()/20)+1;
+		if(countTotalMessages()%20==0)
+			return countTotalMessages()/20;
+		else
+			return (countTotalMessages()/20)+1;
 	}
 	
 }

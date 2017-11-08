@@ -35,7 +35,7 @@ public class MessageDAOImpl implements MessageDAO {
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getDate("createtime"));
-				//
+				m.getCreator().setUid(rs.getInt("creatorId"));
 			} else {
 				return null;
 			}
@@ -72,7 +72,7 @@ public class MessageDAOImpl implements MessageDAO {
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getDate("createtime"));
-				//
+				m.getCreator().setUid(rs.getInt("creatorId"));
 				list.add(m);
 			} 
 		} catch (SQLException e) {
