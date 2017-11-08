@@ -12,9 +12,9 @@ create table user(
 
 create table message(
     MID int primary key AUTO_INCREMENT,
-    Message text not null,
+    message text not null,
     createtime datetime not null,
-    creatorID int not null,
+    creatorID int not null,01
     FOREIGN KEY (creatorID) REFERENCES user(UID)
 );
     
