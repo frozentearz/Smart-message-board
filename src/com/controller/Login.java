@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.models.User;
 
@@ -40,7 +41,13 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		User u = factory.login(name, password);
-		
+		if (u != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", u);
+			response.sendRedirect("index.html");
+		} else {
+			response.sendRedirect("failed.html");
+		}
 		
 	}
 
