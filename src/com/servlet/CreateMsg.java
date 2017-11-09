@@ -1,4 +1,4 @@
-package com.controller;
+package com.servlet;
 
 import java.io.IOException;
 import java.util.Date;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.controller.Factory;
 import com.models.Message;
 
 /**
