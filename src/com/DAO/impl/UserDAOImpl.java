@@ -29,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
 			pstmt.setString(1, String.valueOf(uid));
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
+				u.setUid(rs.getInt("UID"));
 				u.setName(rs.getString("Uname"));
 				u.setPasswd(rs.getString("Upasswd"));
 				u.setSex(rs.getString("Usex"));
@@ -66,6 +67,7 @@ public class UserDAOImpl implements UserDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				u.setUid(rs.getInt("UID"));
+				u.setName(username);
 				u.setPasswd(rs.getString("Upasswd"));
 				u.setSex(rs.getString("Usex"));
 				u.setHead(rs.getString("Uhead"));

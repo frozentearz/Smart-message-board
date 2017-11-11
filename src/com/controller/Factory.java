@@ -52,16 +52,21 @@ public class Factory {
 	public User registerUser(User user) {
 		// TODO
 		//对用户名和密码进行检验
-		if(userDAO.getUserByUsername(user.getName())==null
-				&& !(user.getPasswd().length()>5 && user.getPasswd().length()<=15)) {
+		String name=user.getName();
+//		System.out.println(name);
+		User u=userDAO.getUserByUsername(name);
+//		System.out.println(u);
+		if(u!=null && !(user.getPasswd().length()<5 || user.getPasswd().length()>=15)) {
 			return null;
+		} else {
+			//判断是否添加用户成功
+			if(userDAO.addUser(user)) {
+				user.setUid(userDAO.getUserByUsername(name).getUid());
+				return user;
+			} else { 
+				return null;
+			}
 		}
-		//判断是否添加用户成功
-		if(userDAO.addUser(user)) 
-			return user;
-		else 
-			return null;
-		
 	}
 	
 	/**

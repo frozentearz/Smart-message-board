@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.controller.Factory;
 import com.models.User;;
@@ -28,11 +29,16 @@ public class Register extends HttpServlet {
     public Register() {
         super();
         // TODO Auto-generated constructor stub
-        ServletConfig config = getServletConfig();
-        ServletContext sc = config.getServletContext();
+    }
+    
+    /**
+     * @see Servlet#init(ServletConfig)
+     */
+    public void init(ServletConfig config) throws ServletException {
+    	ServletContext sc = config.getServletContext();
         this.factory = (Factory) sc.getAttribute("factory");
     }
-
+    
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,9 +52,17 @@ public class Register extends HttpServlet {
 		u.setName(name);
 		u.setPasswd(password);
 		u.setSex(sex);
-		factory.registerUser(u);
+		u.setHead("https://avatars0.githubusercontent.com/u/18512486?s=460&v=4");
+		User ReturnU = factory.registerUser(u);
+		if (ReturnU != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", u);
+			response.sendRedirect("index.jsp");
+		} else {
+			response.sendRedirect("regfailed.jsp");
+		}
 		
-		response.sendRedirect("/login.jsp");
+		
 	}
 
 }

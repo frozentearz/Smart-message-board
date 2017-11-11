@@ -14,7 +14,7 @@ create table message(
     MID int primary key AUTO_INCREMENT,
     message text not null,
     createtime datetime not null,
-    creatorID int not null,01
+    creatorID int not null,
     FOREIGN KEY (creatorID) REFERENCES user(UID)
 );
     

@@ -42,7 +42,7 @@ public class UserDAOImplTest {
 	private static void getUserByUsernameTest() {
 		// TODO 自动生成的方法存根
 		User u = new User();
-		u = uDAOImpl.getUserByUsername("");
+		u = uDAOImpl.getUserByUsername("***");
 		if (u != null) {
 			System.out.println(u.getUid());
 			System.out.println(u.getPasswd());

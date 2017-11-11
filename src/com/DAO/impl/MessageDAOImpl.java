@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.DAO.MessageDAO;
+import com.DAO.*;
 import com.controller.DBConnector;
 import com.models.*;
 
@@ -24,17 +24,23 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from message where mid = ?;";
+		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID where mid = ?;";
 		Message m = new Message();
 	    try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, String.valueOf(mid));
+			pstmt.setInt(1, mid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getDate("createtime"));
-				m.getCreator().setUid(rs.getInt("creatorId"));
+//				m.getCreator().setUid(rs.getInt("creatorId"));
+//				m.setCreatetime(rs.getDate("createTime"));
+				User u=new User();
+				u.setUid(rs.getInt("UID"));
+				u.setName(rs.getString("Uname"));
+				u.setHead(rs.getString("Uhead"));
+				m.setCreator(u);
 			} else {
 				return null;
 			}
@@ -60,19 +66,24 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select top 20 * from message where MID between ? and ?";
+		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID ) as m limit ?,?;";
 		List<Message> list=new ArrayList();
-		Message m = new Message();
+//		Message m = new Message();
+		User u = new User();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, offset);
-			pstmt.setInt(2, amount);
+			pstmt.setInt(2, amount - offset);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
+				Message m = new Message();
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getDate("createtime"));
-				m.getCreator().setUid(rs.getInt("creatorId"));
+				u.setUid(rs.getInt("UID"));
+				u.setName(rs.getString("Uname"));
+				u.setHead(rs.getString("Uhead"));
+				m.setCreator(u);
 				list.add(m);
 			} 
 		} catch (SQLException e) {
@@ -98,20 +109,26 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select top 20 * from message where ceratorID=? and ( MID between ? and ?)";
+		String sql="select * from (select MID, Message,createTime,UId,Uname,Uhead from message join user on creatorID =?) as m limit ?,?;";
 		List<Message> list=new ArrayList();
-		Message m = new Message();
+		User u=new User();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, String.valueOf(userId));
+			pstmt.setInt(1, userId);
 			pstmt.setInt(2, offset);
-			pstmt.setInt(3, amount);
+			pstmt.setInt(3, amount - offset);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				m.setMid(rs.getInt(1));
+			while (rs.next()) {
+				Message m = new Message();
+				m.setMid(rs.getInt("MID"));
 				m.setMessage(rs.getString("Message"));
-				m.setCreatetime(rs.getDate("createtime"));
-				//
+				m.setCreatetime(rs.getDate("createTime"));
+				if(u.getUid()==0) {
+					u.setUid(rs.getInt("UID"));
+					u.setName(rs.getString("Uname"));
+					u.setHead(rs.getString("Uhead"));
+				}
+				m.setCreator(u);
 				list.add(m);
 			} 
 		} catch (SQLException e) {
@@ -194,7 +211,7 @@ public class MessageDAOImpl implements MessageDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, message.getMessage());
-			pstmt.setDate(2, (Date) message.getCreatetime());
+			pstmt.setDate(2, message.getCreatetime());
 			pstmt.setInt(3, message.getCreator().getUid()); //这个这样写
 			if(pstmt.executeUpdate()<0) {
 				return false;

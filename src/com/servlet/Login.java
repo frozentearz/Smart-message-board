@@ -28,11 +28,16 @@ public class Login extends HttpServlet {
     public Login() {
         super();
         // TODO Auto-generated constructor stub
-        ServletConfig config = getServletConfig();
-        ServletContext sc = config.getServletContext();
+    }
+    
+    /**
+     * @see Servlet#init(ServletConfig)
+     */
+    public void init(ServletConfig config) throws ServletException {
+    	ServletContext sc = config.getServletContext();
         this.factory = (Factory) sc.getAttribute("factory");
     }
-
+    
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -45,9 +50,9 @@ public class Login extends HttpServlet {
 		if (u != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", u);
-			response.sendRedirect("index.html");
+			response.sendRedirect("index.jsp");
 		} else {
-			response.sendRedirect("failed.html");
+			response.sendRedirect("failed.jsp");
 		}
 		
 	}
