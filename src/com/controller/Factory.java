@@ -91,6 +91,9 @@ public class Factory {
 			return null;
 	}
 	
+	public List<Message> getMessage() {
+		return messageDAO.getMessage();
+	}
 	/**
 	 * 在数据库中查找一条信息.
 	 * @param mid 消息的id.

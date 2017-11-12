@@ -6,12 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link  href="css/3.css" rel="stylesheet" type="text/css">
-<title>登录成功</title>
+<title>操作失败</title>
 </head>
 <!-- 代码开始 -->
 <div id="container">
-  <p>注册成功</p>
-  <p>将在<span id="time">10</span>秒后自动转入<a href="index.html" class="btn">网站首页</a> </p>
+  <p>操作失败</p>
+  <p>将在<span id="time">10</span>秒后自动转入<a href="index.jsp" class="btn">网站首页</a> </p>
 </div>
 <div id="cloud"><img src="img/successed/007.jpg" width="220" height="180"></div>
 <!-- 代码 结束 --> 

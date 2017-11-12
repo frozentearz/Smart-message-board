@@ -59,7 +59,7 @@ public class Register extends HttpServlet {
 			session.setAttribute("user", u);
 			response.sendRedirect("index.jsp");
 		} else {
-			response.sendRedirect("regfailed.jsp");
+			response.sendRedirect("failed.jsp");
 		}
 		
 		

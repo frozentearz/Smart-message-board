@@ -1,16 +1,27 @@
 package com.test;
 
 import java.util.List;
-import java.sql.Date;
 
-import com.models.*;
 import com.DAO.*;
+import com.DAO.impl.MessageDAOImpl;
+import com.models.*;
+
  
-public class MessageDAOImpl {
-	static MessageDAOImpl mDAOImpl = new MessageDAOImpl();
+public class MessageDAOImplTest {
 	public static void main(String[] args) {
  		// TODO Auto-generated method stub
+		MessageDAO message=new MessageDAOImpl();
 		
+		List list= message.getMessages(1, 20);
+		Message m=new Message();
+		User u=new User();
+		for(int i=0; i<list.size(); i++) {
+			m=(Message) list.get(i);
+			u=(User)m.getCreator();
+			System.out.println(m.toString());
+			System.out.println();
+			System.out.println(u.toString());
+		}
  		//getMessage（int mid）测试
 // 		Message mm=mDAOImpl.getMessage(2);           // bug here
 // 		System.out.println(mm.getMessage());

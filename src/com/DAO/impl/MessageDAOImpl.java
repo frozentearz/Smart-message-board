@@ -19,6 +19,45 @@ import com.models.*;
 public class MessageDAOImpl implements MessageDAO {
 	
 	@Override
+	public List<Message> getMessage(){
+		List list = new ArrayList();
+		Connection conn = DBConnector.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID order by createTime;";
+		Message m = new Message();
+	    try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				m.setMid(rs.getInt(1));
+				m.setMessage(rs.getString("Message"));
+				m.setCreatetime(rs.getDate("createtime"));
+				User u=new User();
+				u.setUid(rs.getInt("UID"));
+				u.setName(rs.getString("Uname"));
+				u.setHead(rs.getString("Uhead"));
+				m.setCreator(u);
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	@Override
 	public Message getMessage(int mid) {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnector.getConnection();
@@ -66,10 +105,10 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID ) as m limit ?,?;";
+		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID order by createtime ) as m limit ?,?;";
 		List<Message> list=new ArrayList();
 //		Message m = new Message();
-		User u = new User();
+//		User u = new User();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, offset);
@@ -77,6 +116,7 @@ public class MessageDAOImpl implements MessageDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Message m = new Message();
+				User u = new User();
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getDate("createtime"));

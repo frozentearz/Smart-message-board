@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.controller.Factory;
-import com.models.Message;
+import com.models.*;
+
 
 /**
  * Servlet implementation class CreateMsg
@@ -51,10 +53,15 @@ public class CreateMsg extends HttpServlet {
 		Message m=new Message();
 		m.setMessage(message);
 		m.setCreatetime(createTime);
-		m.setCreator(factory.getUserProfile(creatorId));
+		User u=factory.getUserProfile(creatorId);
+		m.setCreator(u);
 		
 		if(factory.createMessage(m)!=null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", u);
 			response.sendRedirect("index.jsp");
+		}else {
+			response.sendRedirect("failed.jsp");			
 		}
 
 	}
