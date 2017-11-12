@@ -24,7 +24,7 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID order by createTime;";
+		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID order by createTime desc;";
 	    try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -105,7 +105,7 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID order by createtime ) as m limit ?,?;";
+		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID order by createtime desc ) as m limit ?,?;";
 		List<Message> list=new ArrayList();
 //		Message m = new Message();
 //		User u = new User();
@@ -149,7 +149,7 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from (select MID, Message,createTime,UId,Uname,Uhead from message join user on creatorID =?) as m limit ?,?;";
+		String sql="select * from (select MID, Message,createtime,UId,Uname,Uhead from message join user on creatorID =? order by createtime desc) as m limit ?,?;";
 		List<Message> list=new ArrayList();
 		User u=new User();
 		try {

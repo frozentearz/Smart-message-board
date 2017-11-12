@@ -70,7 +70,7 @@
 out.print("<p class='level-item'><a class='button is-primary' href='login.jsp'>登录</a></p>");
 out.print("<p class='level-item'><a class='button is-primary' href='signup.jsp'>注册</a></p>");
 } else {
-out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"alt='Image' id='img'> </figure><div class='dropdown-content'><p><a href='#'>用户信息</a></p><p><a href='#'>修改资料</a></p><p><a href='#'>查看留言</a></p></div></div>");
+out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"alt='Image' id='img'> </figure><div class='dropdown-content'><p><a href='#'>我的信息</a></p><p><a href='#'>我的留言</a></p></div></div>");
 out.print("&nbsp;&nbsp;&nbsp;&nbsp;<p class='level-item'><a href='#'>"+u.getName()+"</a></p>");
 out.print("<form name='Logout' action='Logout' method='post'><input type='submit' class='button is-primary' placeholder='注销' value='注销'></form>");
 }
