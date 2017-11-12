@@ -25,9 +25,9 @@ public class MessageDAOImplTest {
 //			System.out.println(u.toString());
 //		}
  		//getMessage（int mid）测试
- 		Message mm=m.getMessage(10);           // bug here
- 		
- 		System.out.println(mm.getCreatetime());
+// 		Message mm=m.getMessage(10);           // bug here
+// 		
+// 		System.out.println(mm.getCreatetime());
  		//getMessage(int offset, int amount)测试
 // 		List list=m.getMessages(2, 4);
  		
@@ -37,13 +37,13 @@ public class MessageDAOImplTest {
  		//		List list=m.getMessages(2, 1, 3);
  		//		System.out.println(list.toString());
  		 		
- 		 		//addMessage(message)测试
-// 				Message message=new Message();
-// 				message.setMessage("滴滴滴");
-// 				User u=new User();
-// 				u.setUid(4);
-// 				message.setCreator(u);
-// 				System.out.println(m.addMessage(message));
+ 		 	//	addMessage(message)测试
+ 				Message message=new Message();
+ 				message.setMessage("世上无难事");
+ 				User u=new User();
+ 				u.setUid(18);
+ 				message.setCreator(u);
+ 				System.out.println(m.addMessage(message));
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 //		java.util.Date now = new java.util.Date(); 
 //		String resultDate = sdf.format(now);

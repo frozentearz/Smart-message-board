@@ -31,7 +31,7 @@ public class Message {
 	}
 
 	public String getCreatetime() {
- 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm" );
+ 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm" );
  		String s = sdf.format(createtime);
 		return s;
 	}

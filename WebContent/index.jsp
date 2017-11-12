@@ -65,21 +65,21 @@
   </div>
 </div>
   <!-- Right side -->
-  <div class="level-right">
-        <% if(u==null){
-    		out.print("<p class='level-item'><a class='button is-small' href='login.jsp' style='background-color: #09C;''>登录</a></p>");
-   		}else{
-   			out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"alt='Image' id='img'> </figure><div class='dropdown-content'><p><a href='#'>用户信息</a></p><p><a href='#'>修改资料</a></p><p><a href='#'>查看留言</a></p></div></div>");
-   			out.print("<p class='level-item'><a  href='#'>"+u.getName()+"</a></p>");
-        }
-        %>
-    <p class="level-item"><form name="LogOut" action="LogOut" method="post" ><input class="button is-small" style="background-color: #09C;" type="submit" value="注销"></form></p>
-    <p class="level-item"><a  class="button is-small" href="signup.jsp" style="background-color: #09C;" >注册</a></p>
-  </div>
+<div class="level-right">
+<% if(u == null) {
+out.print("<p class='level-item'><a class='button is-primary' href='login.jsp'>登录</a></p>");
+out.print("<p class='level-item'><a class='button is-primary' href='signup.jsp'>注册</a></p>");
+} else {
+out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"alt='Image' id='img'> </figure><div class='dropdown-content'><p><a href='#'>用户信息</a></p><p><a href='#'>修改资料</a></p><p><a href='#'>查看留言</a></p></div></div>");
+out.print("&nbsp;&nbsp;&nbsp;&nbsp;<p class='level-item'><a href='#'>"+u.getName()+"</a></p>");
+out.print("<form name='Logout' action='Logout' method='post'><input type='submit' class='button is-primary' placeholder='注销' value='注销'></form>");
+}
+%>
+</div>
 </nav>
 <div class="clear"></div>
 <%
-	List<Message> message = factory.getMessagesAtPage(1);
+	List<Message> message = factory.getMessages();
 	Message m=new Message();
 	User user=new User();
 	for(int i=0; i<message.size();i++){
@@ -142,22 +142,21 @@
 </div>
 
 -->
-<% int countMessage= factory.countTotalMessages();
+<% 
 	int countPage=factory.countTotalPages();
-	List list=factory.getMessagesAtPage(countPage);
 %>
 
-
 <nav class="pagination" role="navigation" aria-label="pagination">
-  <a class="pagination-previous" title="This is the first page" disabled>null</a>
+  <a class="pagination-previous" title="This is the first page" disabled>首页</a>
   <a class="pagination-next">null</a>
   <ul class="pagination-list">
-    <li>
-      <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
-    </li>
+  <% for(int i=1;i<=countPage;i++){ 
+    out.print("<li><a class='pagination-link is-current' aria-label='Page "+i+"' aria-current='page'>"+i+"</a></li>");
+    }%>
   </ul>
 </nav>
 <div><hr/></div>
+<form name="message" action="CreateMsg" method="post" >
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
@@ -171,13 +170,13 @@
   <div class="media-content">
     <div class="field">
       <p class="control">
-        <textarea class="textarea" placeholder="Add a comment..."></textarea>
+        <textarea name="message" class="textarea" placeholder="Add a comment..."></textarea>
       </p>
     </div>
     <nav class="level">
       <div class="level-left">
         <div class="level-item">
-          <a class="button is-info">Submit</a>
+          <input class="button is-info" type="submit" value="确定" >
         </div>
       </div>
       <div class="level-right">
@@ -190,6 +189,7 @@
     </nav>
   </div>
 </article>
+</form>
 </div>
 <hr/>
 <div class="CopyRight" id="CopyRight">

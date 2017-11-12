@@ -14,7 +14,7 @@ public interface MessageDAO {
 	 * 查询所有的留言根据时间排序
 	 * @return List<Message>
 	 */
-	public List<Message> getMessage();
+	public List<Message> getMessages();
 	/**
 	 * 根据mid查找相应的消息.
 	 * @param mid 消息id.

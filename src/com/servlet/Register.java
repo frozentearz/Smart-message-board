@@ -1,6 +1,7 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -47,7 +48,8 @@ public class Register extends HttpServlet {
 		String name = request.getParameter("username");         //前端表单 name 值
 		String password = request.getParameter("password");    //前端表单 password 值
 		String sex = request.getParameter("sex");              //前端表单 sex 值
-		
+		request.setCharacterEncoding("UTF-8");
+	    PrintWriter out = response.getWriter();
 		User u = new User();
 		u.setName(name);
 		u.setPasswd(password);
@@ -59,7 +61,7 @@ public class Register extends HttpServlet {
 			session.setAttribute("user", u);
 			response.sendRedirect("index.jsp");
 		} else {
-			response.sendRedirect("failed.jsp");
+			out.print("<script language='javascript'>alert('Register Failed!');window.location.href='signup.jsp';</script>");
 		}
 		
 		

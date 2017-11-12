@@ -91,8 +91,8 @@ public class Factory {
 			return null;
 	}
 	
-	public List<Message> getMessage() {
-		return messageDAO.getMessage();
+	public List<Message> getMessages() {
+		return messageDAO.getMessages();
 	}
 	/**
 	 * 在数据库中查找一条信息.
@@ -146,10 +146,10 @@ public class Factory {
 	 */
 	public int countTotalPages() {
 		// TODO	
-		if(countTotalMessages()%20==0)
-			return countTotalMessages()/20;
+		if(countTotalMessages()%10==0)
+			return countTotalMessages()/10;
 		else
-			return (countTotalMessages()/20)+1;
+			return (countTotalMessages()/10)+1;
 	}
 	
 }

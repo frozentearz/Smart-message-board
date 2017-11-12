@@ -19,21 +19,21 @@ import com.models.*;
 public class MessageDAOImpl implements MessageDAO {
 	
 	@Override
-	public List<Message> getMessage(){
+	public List<Message> getMessages(){
 		List list = new ArrayList();
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID order by createTime;";
-		Message m = new Message();
 	    try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
+				Message m = new Message();
+				User u=new User();
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getTimestamp("createtime"));
-				User u=new User();
 				u.setUid(rs.getInt("UID"));
 				u.setName(rs.getString("Uname"));
 				u.setHead(rs.getString("Uhead"));
