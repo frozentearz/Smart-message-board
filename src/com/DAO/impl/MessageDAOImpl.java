@@ -1,7 +1,7 @@
 package com.DAO.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class MessageDAOImpl implements MessageDAO {
 			while (rs.next()) {
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
-				m.setCreatetime(rs.getDate("createtime"));
+				m.setCreatetime(rs.getTimestamp("createtime"));
 				User u=new User();
 				u.setUid(rs.getInt("UID"));
 				u.setName(rs.getString("Uname"));
@@ -72,7 +72,7 @@ public class MessageDAOImpl implements MessageDAO {
 			if (rs.next()) {
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
-				m.setCreatetime(rs.getDate("createtime"));
+				m.setCreatetime(rs.getTimestamp("createtime"));
 //				m.getCreator().setUid(rs.getInt("creatorId"));
 //				m.setCreatetime(rs.getDate("createTime"));
 				User u=new User();
@@ -119,7 +119,7 @@ public class MessageDAOImpl implements MessageDAO {
 				User u = new User();
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
-				m.setCreatetime(rs.getDate("createtime"));
+				m.setCreatetime(rs.getTimestamp("createtime"));
 				u.setUid(rs.getInt("UID"));
 				u.setName(rs.getString("Uname"));
 				u.setHead(rs.getString("Uhead"));
@@ -162,7 +162,7 @@ public class MessageDAOImpl implements MessageDAO {
 				Message m = new Message();
 				m.setMid(rs.getInt("MID"));
 				m.setMessage(rs.getString("Message"));
-				m.setCreatetime(rs.getDate("createTime"));
+				m.setCreatetime(rs.getTimestamp("createTime"));
 				if(u.getUid()==0) {
 					u.setUid(rs.getInt("UID"));
 					u.setName(rs.getString("Uname"));
@@ -218,11 +218,10 @@ public class MessageDAOImpl implements MessageDAO {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
-		String sql="update message set message=?,createtime=? where MID=?";
+		String sql="update message set message=?,createtime=now() where MID=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, message.getMessage());
-			pstmt.setDate(2, (Date) message.getCreatetime());
 			pstmt.setInt(3, message.getMid());
 			if(pstmt.executeUpdate()<0) {
 				return false;
@@ -247,12 +246,11 @@ public class MessageDAOImpl implements MessageDAO {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
-		String sql="insert into message(message, createtime, creatorID) values(?,?,?)";
+		String sql="insert into message(message, createtime, creatorID) values(?,now(),?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, message.getMessage());
-			pstmt.setDate(2, message.getCreatetime());
-			pstmt.setInt(3, message.getCreator().getUid()); //这个这样写
+			pstmt.setInt(2, message.getCreator().getUid()); //这个这样写
 			if(pstmt.executeUpdate()<0) {
 				return false;
 			}

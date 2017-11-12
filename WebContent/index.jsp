@@ -69,7 +69,7 @@
         <% if(u==null){
     		out.print("<p class='level-item'><a class='button is-small' href='login.jsp' style='background-color: #09C;''>登录</a></p>");
    		}else{
-   			out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"alt='Image' id='img'> </figure><div class='dropdown-content'><p><a href='#'>用户信息</a></p><p><a href='#'>修改资料</a></p></div></div>");
+   			out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"alt='Image' id='img'> </figure><div class='dropdown-content'><p><a href='#'>用户信息</a></p><p><a href='#'>修改资料</a></p><p><a href='#'>查看留言</a></p></div></div>");
    			out.print("<p class='level-item'><a  href='#'>"+u.getName()+"</a></p>");
         }
         %>
@@ -99,7 +99,7 @@
       <div class="content">
         <p> 
         <%=("<strong>"+user.getName()+"</strong>")%>
-          <small>/..状态</small> <small><%=m.getCreatetime() %></small>//详细时间
+          <small>/..状态</small> <small><%=m.getCreatetime() %></small>
           <br>
           <% out.print(m.getMessage()); %>
           </p>

@@ -1,11 +1,13 @@
 package com.models;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Message {
 	private int mid;
 	private String message;
-	private Date createtime;
+	private Timestamp createtime;
 	private User creator;
 	
 	public Message() {
@@ -28,11 +30,13 @@ public class Message {
 		this.message = message;
 	}
 
-	public Date getCreatetime() {
-		return createtime;
+	public String getCreatetime() {
+ 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm" );
+ 		String s = sdf.format(createtime);
+		return s;
 	}
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreatetime(Timestamp timestamp) {
+		this.createtime = timestamp;
 	}
 	public User getCreator() {
 		return creator;
