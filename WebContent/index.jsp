@@ -150,15 +150,14 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
  </div>
 </nav>
 <div><hr/></div>
+<% if(u!=null){ %>
 <form name="message" action="CreateMsg" method="post" >
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-    <% if(u==null){ 
-    out.print("<img src='https://bulma.io/images/placeholders/128x128.png'>");
-    }else{
-    	out.print("<img src='"+u.getHead()+"'>");	
-    } %>
+    <%
+    	out.print("<img src='"+u.getHead()+"'>");
+    %>
     </p>
   </figure>
   <div class="media-content">
@@ -186,6 +185,9 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 </form>
 </div>
 <hr/>
+<%
+}
+%>
 <div class="CopyRight" id="CopyRight">
 <p align="center">版权声明:此网站仅用于学习使用</p>
 <p align="center">联系我们：<a>frozen_tearz@163.com</a></p>
