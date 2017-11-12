@@ -133,15 +133,20 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 %>
 
 <nav class="pagination" role="navigation" aria-label="pagination">
-<div >
-     <ul class="pagination-list" style="list-style:none" >
+<div style="margin: 0 auto" >
+     	<a class="pagination-previous" href="index.jsp?nowPage=1" >首页</a>
+     	<% if(nowPage!=1){
+     	out.print("<a class='pagination-next' href='index.jsp?nowPage="+(nowPage-1)+"' >上一页</a>");
+		}%>
   	<% for(int i=1;i<=countPages;i++){ 
   		int p=i;
     	out.print("<a class='pagination-link is-current' href='index.jsp?nowPage="+p+" ' aria-current='page'>"+i+"</a>");
     	}%>
-    
-    
-     </ul>  
+         	<% if(nowPage!=countPages){
+     	out.print("<a class='pagination-next' href='index.jsp?nowPage="+(nowPage+1)+"' >下一页</a>");
+		}
+     	out.print("<a class='pagination-previous' href='index.jsp?nowPage="+countPages+"' >末页</a>");  
+  %>
  </div>
 </nav>
 <div><hr/></div>
