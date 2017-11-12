@@ -7,11 +7,10 @@ public class FactoryTest {
 	public static void main(String[] args) {
 		Factory factory=new Factory();
 		User u = new User();
-		u.setName("Xiao");
-		u.setPasswd("test123456");
+		u.setName("不见");
+		u.setPasswd("111111");
 		u.setSex("F");
-		u.setHead("https://avatars0.githubusercontent.com/u/18512486?s=460&v=4");
-		
+		u.setHead("img//avatar//avater_01.jpg");
 		System.out.println(factory.registerUser(u));
 	}
 }

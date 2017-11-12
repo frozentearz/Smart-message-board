@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import com.DAO.MessageDAO;
@@ -53,10 +54,10 @@ public class Factory {
 		// TODO
 		//对用户名和密码进行检验
 		String name=user.getName();
-//		System.out.println(name);
+		System.out.println(name);
 		User u=userDAO.getUserByUsername(name);
-//		System.out.println(u);
-		if(u!=null && !(user.getPasswd().length()<5 || user.getPasswd().length()>=15)) {
+		System.out.println(u);
+		if(u!=null ) {
 			return null;
 		} else {
 			//判断是否添加用户成功

@@ -193,7 +193,7 @@ public class MessageDAOImpl implements MessageDAO {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
-		String sql="delete message where MID=?";
+		String sql="delete from message where MID=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mid);

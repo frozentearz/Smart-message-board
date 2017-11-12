@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>登录管理</title>
 <link href="css/1.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/bulma.css" />
 <script type="text/javascript" language="javascript">
     function validateForm() {
     var x = document.myform.username.value;
@@ -24,6 +25,9 @@
 </script>
 </head>
 <body>
+<div style="float: left" ><a class="button is-primary" href="index.jsp">首页</a></div>
+<div style="float: right" ><a class="button is-primary" href="signup.jsp">注册</a></div>
+<div style="clear: both"></div>
 <div id="login">
 <h1>登录管理</h1>   
     <form  name="myform" action="Login" method="post" onsubmit="return validateForm()" >

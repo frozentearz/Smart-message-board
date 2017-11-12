@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -54,14 +55,16 @@ public class Register extends HttpServlet {
 		u.setName(name);
 		u.setPasswd(password);
 		u.setSex(sex);
-		u.setHead("https://avatars0.githubusercontent.com/u/18512486?s=460&v=4");
+		int random=(new Random()).nextInt(10)+1;
+		u.setHead("img\\avatar\\avatar_0"+random+".jpg");
 		User ReturnU = factory.registerUser(u);
+		System.out.println(ReturnU);
 		if (ReturnU != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", u);
 			response.sendRedirect("index.jsp");
 		} else {
-			out.print("<script language='javascript'>alert('Register Failed!');window.location.href='signup.jsp';</script>");
+			out.print("<script language='javascript'>alert('The user name has been registered');window.location.href='signup.jsp';</script>");
 		}
 		
 		
