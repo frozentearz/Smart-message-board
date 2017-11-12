@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<div class="container" style="margin:35px auto auto auto;">
+<div class="container" style="margin:15px auto auto auto;">
 <!-- Main container -->
 <nav class="level" >
   <!-- Left side -->
@@ -78,8 +78,16 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 </div>
 </nav>
 <div class="clear"></div>
+
+
 <%
-	List<Message> message = factory.getMessages();
+	int countPages=factory.countTotalPages();
+	int nowPage=1;
+	String page_s=request.getParameter("nowPage");
+	if(page_s!=null){
+		nowPage=Integer.parseInt(page_s);
+	}
+	List<Message> message = factory.getMessagesAtPage(nowPage);
 	Message m=new Message();
 	User user=new User();
 	for(int i=0; i<message.size();i++){
@@ -123,37 +131,18 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 </div>
 <% 	}
 %>
-<!--  
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-reply"></i></span>
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-heart"></i></span>
-          </a>
-        </div>
-      </nav>
-    </div>
-  </article>
-</div>
-
--->
-<% 
-	int countPage=factory.countTotalPages();
-%>
 
 <nav class="pagination" role="navigation" aria-label="pagination">
-  <a class="pagination-previous" title="This is the first page" disabled>首页</a>
-  <a class="pagination-next">null</a>
-  <ul class="pagination-list">
-  <% for(int i=1;i<=countPage;i++){ 
-    out.print("<li><a class='pagination-link is-current' aria-label='Page "+i+"' aria-current='page'>"+i+"</a></li>");
-    }%>
-  </ul>
+<div >
+     <ul class="pagination-list" style="list-style:none" >
+  	<% for(int i=1;i<=countPages;i++){ 
+  		int p=i;
+    	out.print("<a class='pagination-link is-current' href='index.jsp?nowPage="+p+" ' aria-current='page'>"+i+"</a>");
+    	}%>
+    
+    
+     </ul>  
+ </div>
 </nav>
 <div><hr/></div>
 <form name="message" action="CreateMsg" method="post" >
@@ -170,7 +159,7 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
   <div class="media-content">
     <div class="field">
       <p class="control">
-        <textarea name="message" class="textarea" placeholder="Add a comment..."></textarea>
+        <textarea name="message" class="textarea" placeholder="添加留言"></textarea>
       </p>
     </div>
     <nav class="level">
@@ -182,7 +171,7 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
       <div class="level-right">
         <div class="level-item">
           <label class="checkbox">
-            <input type="checkbox"> Press enter to submit
+            <input type="checkbox"> 按Enter提交
           </label>
         </div>
       </div>
@@ -194,7 +183,7 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 <hr/>
 <div class="CopyRight" id="CopyRight">
 <p align="center">版权声明:此网站仅用于学习使用</p>
-<p align="center">联系我们：<a>1234567</a></p>
+<p align="center">联系我们：<a>frozen_tearz@163.com</a></p>
 
 </div>
 </body>

@@ -126,8 +126,8 @@ public class Factory {
 	 */
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
-		int star=n==1?n:n*10+1;
-		int end=n==1?(n+19):(n*10+20);
+		int star= n==1?0:(n-1)*10+1;
+		int end = n==1?10:((n-1)*10+10);
 		return messageDAO.getMessages(star,end );
 	}
 	
