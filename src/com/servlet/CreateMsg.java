@@ -46,14 +46,12 @@ public class CreateMsg extends HttpServlet {
 		// TODO Auto-generated method stub
 		String message=request.getParameter("message");
 //		String creator=request.getParameter("creator");   //...
-		String creatorId_s=request.getParameter("creatorId");   //...
-		int creatorId=Integer.parseInt(creatorId_s);
-		Date createTime = new Date(System.currentTimeMillis());
+		String UID_s=request.getParameter("UID");   //...
+		int UID=Integer.parseInt(UID_s);
 		
 		Message m=new Message();
 		m.setMessage(message);
-		m.setCreatetime(createTime);
-		User u=factory.getUserProfile(creatorId);
+		User u=factory.getUserProfile(UID);
 		m.setCreator(u);
 		
 		if(factory.createMessage(m)!=null) {

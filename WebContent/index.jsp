@@ -73,7 +73,7 @@
    			out.print("<p class='level-item'><a  href='#'>"+u.getName()+"</a></p>");
         }
         %>
-    <p class="level-item"><a  class="button is-small" href="#" style="background-color: #09C;" >注销</a></p>
+    <p class="level-item"><form name="LogOut" action="LogOut" method="post" ><input class="button is-small" style="background-color: #09C;" type="submit" value="注销"></form></p>
     <p class="level-item"><a  class="button is-small" href="signup.jsp" style="background-color: #09C;" >注册</a></p>
   </div>
 </nav>
