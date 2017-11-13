@@ -34,11 +34,11 @@
 </head>
 <body>
 
-<div class="container" style="margin:15px auto auto auto;">
+<div class="container" style="margin:15px auto;">
 <!-- Main container -->
 <nav class="level" >
   <!-- Left side -->
-  <div class="level-left" >
+  <div class="level-left" style="margin-left: 100px" >
   <figure class='image is-128x128'>
   <img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" />
   </figure>
@@ -67,19 +67,19 @@
   <!-- Right side -->
 <div class="level-right">
 <% if(u == null) {
-out.print("<p class='level-item'><a class='button is-primary' href='login.jsp'>登录</a></p>");
-out.print("<p class='level-item'><a class='button is-primary' href='signup.jsp'>注册</a></p>");
-} else {
-out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"' alt='logo' id='img'> </figure><div class='dropdown-content'><p><a href='#'>我的信息</a></p><p><a href='#'>我的留言</a></p></div></div>");
-out.print("&nbsp;&nbsp;&nbsp;&nbsp;<p class='level-item'><a href='#'>"+u.getName()+"</a></p>");
-out.print("<form name='Logout' action='Logout' method='post'><input type='submit' class='button is-primary' placeholder='注销' value='注销'></form>");
+	out.print("<p class='level-item'><a class='button is-primary' href='login.jsp'>登录</a></p>");
+	out.print("<p class='level-item'><a class='button is-primary' href='signup.jsp'>注册</a></p>");
+	} else {
+	out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"' alt='logo' id='img'> </figure><div class='dropdown-content'><p><a href='MyInfo.jsp'>我的信息</a></p><p><a href='#'>我的留言</a></p></div></div>");
+	out.print("&nbsp;&nbsp;&nbsp;&nbsp;<p class='level-item'><a href='#'>"+u.getName()+"</a></p>");
+	out.print("<form name='Logout' action='Logout' method='post'><input type='submit' class='button is-primary' placeholder='注销' value='注销'></form>");
 }
 %>
 </div>
 </nav>
 <div class="clear"></div>
 
-
+<!-- 留言层 -->
 <%
 	int countPages=factory.countTotalPages();
 	int nowPage=1;
@@ -118,7 +118,7 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 </div>
 <% 	}
 %>
-
+<!-- 页码层 -->
 <nav class="pagination" role="navigation" aria-label="pagination">
 <div style="margin: 0 auto" >
      	<a class="pagination-previous" href="index.jsp?nowPage=1" >首页</a>
@@ -137,6 +137,7 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
  </div>
 </nav>
 <div><hr/></div>
+<!-- 发帖层 -->
 <% if(u!=null){ %>
 <form name="message" action="CreateMsg" method="post" >
 <article class="media">
@@ -175,6 +176,7 @@ out.print("<form name='Logout' action='Logout' method='post'><input type='submit
 <%
 }
 %>
+<!-- 版权层 -->
 <div class="CopyRight" id="CopyRight">
 <p align="center">版权声明:此网站仅用于学习使用</p>
 <p align="center">联系我们：<a>frozen_tearz@163.com</a></p>

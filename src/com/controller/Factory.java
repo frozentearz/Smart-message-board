@@ -71,6 +71,24 @@ public class Factory {
 	}
 	
 	/**
+	 * 更新用户信息
+	 * @return user
+	 */
+	public User UpdateUser(User user) {
+		User u=userDAO.getUserByUsername(user.getName());
+		System.out.println(u);
+		if(u!=null ) {
+			return null;
+		} else {
+			//判断是否添加用户成功
+			if(userDAO.updateUser(user)) {
+				return user;
+			} else { 
+				return null;
+			}
+		}
+	}
+	/**
 	 * 查看用户信息.
 	 * @param userid 用户id.
 	 * @return 用户信息.
