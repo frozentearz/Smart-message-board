@@ -13,6 +13,41 @@
 <link rel="stylesheet" type="text/css" href="css/bulma.css" />
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 <title>留言板</title>
+<script src="js/vue.js" ></script>
+  <style>
+  body{
+      font-family:"Segoe UI";
+    }
+    li{
+      list-style:none;
+    }
+    a{
+      text-decoration:none;
+    }
+    .pagination {
+        position: relative;
+
+      }
+      .pagination li{
+        display: inline-block;
+        margin:0 5px;
+      }
+      .pagination li a{
+        padding:.5rem 1rem;
+        display:inline-block;
+        border:1px solid #ddd;
+        background:#fff;
+
+        color:#0E90D2;
+      }
+      .pagination li a:hover{
+        background:#eee;
+      }
+      .pagination li.active a{
+        background:#0E90D2;
+        color:#fff;
+      }
+  </style>
 <style>
 .dropdown {
   position: relative;
@@ -38,7 +73,7 @@
 <!-- Main container -->
 <nav class="level" >
   <!-- Left side -->
-  <div class="level-left" style="margin-left: 100px" >
+  <div class="level-left" style="margin-left: 150px" >
   <figure class='image is-128x128'>
   <img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" />
   </figure>
@@ -121,47 +156,68 @@
 <!-- 页码层 -->
 <nav class="pagination" role="navigation" aria-label="pagination">
 <div style="margin: 0 auto" >
-     	<a class="pagination-previous" href="index.jsp?nowPage=1" >首页</a>
-     	<% if(nowPage!=1){
-     	out.print("<a class='pagination-next' href='index.jsp?nowPage="+(nowPage-1)+"' >上一页</a>");
-		}%>
-		<%if(nowPage+3<countPages) {
-			if(nowPage>4){
-				out.println("<a href='index.jsp?nowPage="+(nowPage-2)+"' class='pagination-link is-current'>"+(nowPage-2)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(nowPage-1)+"' class='pagination-link is-current'>"+(nowPage-1)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(nowPage)+"' class='pagination-link'>"+(nowPage)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(nowPage+1)+"' class='pagination-link is-current'>"+(nowPage+1)+"</a>");	
-			}else{
-				out.println("<a href='index.jsp?nowPage="+(nowPage)+"' class='pagination-link'>"+(nowPage)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(nowPage+1)+"' class='pagination-link is-current'>"+(nowPage+1)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(nowPage+2)+"' class='pagination-link is-current'>"+(nowPage+2)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(nowPage+3)+"' class='pagination-link is-current'>"+(nowPage+3)+"</a>");
-			}
-		}else{ 			
-			if(nowPage!=countPages){
-		
-			out.println("<a href='index.jsp?nowPage="+(nowPage-2)+"' class='pagination-link is-current'>"+(nowPage-2)+"</a>");
-			out.println("<a href='index.jsp?nowPage="+(nowPage-1)+"' class='pagination-link is-current'>"+(nowPage-1)+"</a>");
-		    out.println("<a href='index.jsp?nowPage="+nowPage+"' class='pagination-link'>"+nowPage+"</a>");
-	     	out.println("<a href='index.jsp?nowPage="+(nowPage+1)+"' class='pagination-link is-current'>"+(nowPage+1)+"</a>");
-
-		}else{
-				out.println("<a href='index.jsp?nowPage="+(countPages-3)+"' class='pagination-link is-current '>"+(countPages-3)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(countPages-2)+"' class='pagination-link is-current'>"+(countPages-2)+"</a>");
-				out.println("<a href='index.jsp?nowPage="+(countPages-1)+"' class='pagination-link is-current'>"+(countPages-1)+"</a>");
-		        out.println("<a href='index.jsp?nowPage="+countPages+"' class='pagination-link'>"+countPages+"</a>");		
-		} 
-		} %>
-  
-		    
-         	<% if(nowPage!=countPages){
-     	out.print("<a class='pagination-next' href='index.jsp?nowPage="+(nowPage+1)+"' >下一页</a>");
-		}
-     	out.print("<a class='pagination-previous' href='index.jsp?nowPage="+countPages+"' >末页</a>");  
-  %>
+       <script type="text/x-template" id="page">
+        <ul class="pagination" >
+            <li ><a :href="'index.jsp?nowPage='+<%=1%>"class="pagination-previous" >首页</a></li>
+            <li v-show="current != 1" @click="current-- && goto(current)" ><a :href="'index.jsp?nowPage='+<%=(nowPage-1)%>" class="pagination-next" >上一页</a></li>
+            <li v-for="index in pages" @click="goto(index)" :class="{'active':current == index}" :key="index">
+              <a :href="'index.jsp?nowPage='+index" >{{index}}</a>
+            </li>
+            <li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a :href="'index.jsp?nowPage='+<%=(nowPage+1)%>" class="pagination-next" >下一页</a></li>
+            <li><a :href="'index.jsp?nowPage='+<%=countPages%>" class="pagination-previous" >末页</a></li>
+        </ul>
+    </script>
+    <div id="app" class="pagination">
+          <page></page>
+     </div>
  </div>
 </nav>
-s
+<script>
+  Vue.component("page",{
+      template:"#page",
+        data:function(){
+          return{
+            current: <%=nowPage%>,
+            showItem:5,
+            allpage:<%=countPages%>
+          }
+        },
+        computed:{
+          pages:function(){
+                var pag = [];
+                  if( this.current < this.showItem ){ //如果当前的激活的项 小于要显示的条数
+                       //总页数和要显示的条数那个大就显示多少条
+                       var i = Math.min(this.showItem,this.allpage);
+                       while(i){
+                           pag.unshift(i--);
+                       }
+                   }else{ //当前页数大于显示页数了
+                       var middle = this.current - Math.floor(this.showItem / 2 ),//从哪里开始
+                           i = this.showItem;
+                       if( middle >  (this.allpage - this.showItem)  ){
+                           middle = (this.allpage - this.showItem) + 1
+                       }
+                       while(i--){
+                           pag.push( middle++ );
+                       }
+                   }
+                 return pag
+               }
+      },
+      methods:{
+        goto:function(index){
+          if(index == this.current) return;
+            this.current = index;           
+            //这里可以发送ajax请求
+        }
+      }
+    })
+
+var vm = new Vue({
+  el:'#app',
+})
+
+</script>
 <div><hr/></div>
 <!-- 发帖层 -->
 <% if(u!=null){ %>

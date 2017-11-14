@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    // TODO Auto-generated method stub
-	    String name = request.getParameter("username");
+	    String name =new String( request.getParameter("username").getBytes("ISO-8859-1"),"UTF-8" );
 	    String password = request.getParameter("password");
 	    request.setCharacterEncoding("UTF-8");
 	    PrintWriter out = response.getWriter();
