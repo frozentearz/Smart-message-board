@@ -1,6 +1,5 @@
 package com.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import com.DAO.MessageDAO;
@@ -54,9 +53,9 @@ public class Factory {
 		// TODO
 		//对用户名和密码进行检验
 		String name=user.getName();
-		System.out.println(name);
+//		System.out.println(name);
 		User u=userDAO.getUserByUsername(name);
-		System.out.println(u);
+//		System.out.println(u);
 		if(u!=null ) {
 			return null;
 		} else {
@@ -137,6 +136,17 @@ public class Factory {
 	}
 	
 	/**
+	 * 根据用户ID查找用户的留言
+	 * @param uid 用户id
+	 * @param n  用户留言的页数
+	 * @return  用户某一页的留言
+	 */
+	public List<Message> getMessagesByUidAtPage(int uid,int n){
+		int offset= n==1 ? 0 : (n-1)*10;
+		int amount = 10;		
+		return messageDAO.getMessages(uid, offset, amount) ;
+	} 
+	/**
 	 * 获取一整页的消息.
 	 * 我们的网站上规定，每一页显示20条消息. 这个函数是用来获取第n页
 	 * 的所有消息. 例如：当n=1时，返回从第1到第20条消息的列表.
@@ -145,9 +155,9 @@ public class Factory {
 	 */
 	public List<Message> getMessagesAtPage(int n) {
 		// TODO
-		int star= n==1?0:(n-1)*10+1;
-		int end = n==1?10:((n-1)*10+10);
-		return messageDAO.getMessages(star,end );
+		int offset= n==1 ? 0 : (n-1)*10;
+		int amount = 10;
+		return messageDAO.getMessages(offset,amount );
 	}
 	
 	/**
@@ -168,7 +178,7 @@ public class Factory {
 		if(countTotalMessages()%10==0)
 			return countTotalMessages()/10;
 		else
-			return (countTotalMessages()/10)+1;
+			return (countTotalMessages()/10+1);
 	}
 	
 }

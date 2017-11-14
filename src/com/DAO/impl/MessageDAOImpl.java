@@ -63,7 +63,7 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID where mid = ?;";
+		String sql = "select m.MID,m.message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on m.creatorId=u.UID where mid = ? order by ctreatetime desc;";
 		Message m = new Message();
 	    try {
 			pstmt = conn.prepareStatement(sql);
@@ -106,13 +106,11 @@ public class MessageDAOImpl implements MessageDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID order by createtime desc ) as m limit ?,?;";
-		List<Message> list=new ArrayList();
-//		Message m = new Message();
-//		User u = new User();
+		List<Message> list=new ArrayList<Message>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, offset);
-			pstmt.setInt(2, amount - offset);
+			pstmt.setInt(2, amount);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Message m = new Message();
@@ -149,14 +147,14 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from (select MID, Message,createtime,UId,Uname,Uhead from message join user on creatorID =? order by createtime desc) as m limit ?,?;";
-		List<Message> list=new ArrayList();
+		String sql="select * from (select MID, Message,createtime,UId,Uname,Uhead from message join user on creatorID = UId where UId=? order by createtime desc) as m limit ?,?;";
+		List<Message> list=new ArrayList<Message>();
 		User u=new User();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setInt(2, offset);
-			pstmt.setInt(3, amount - offset);
+			pstmt.setInt(3, amount);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Message m = new Message();
