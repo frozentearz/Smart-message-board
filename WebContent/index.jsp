@@ -125,10 +125,35 @@
      	<% if(nowPage!=1){
      	out.print("<a class='pagination-next' href='index.jsp?nowPage="+(nowPage-1)+"' >上一页</a>");
 		}%>
-  	<% for(int i=1;i<=countPages;i++){ 
-  		int p=i;
-    	out.print("<a class='pagination-link is-current' href='index.jsp?nowPage="+p+" ' aria-current='page'>"+i+"</a>");
-    	}%>
+		<%if(nowPage+3<countPages) {
+			if(nowPage>4){
+				out.println("<a href='index.jsp?nowPage="+(nowPage-2)+"' class='pagination-link is-current'>"+(nowPage-2)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(nowPage-1)+"' class='pagination-link is-current'>"+(nowPage-1)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(nowPage)+"' class='pagination-link'>"+(nowPage)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(nowPage+1)+"' class='pagination-link is-current'>"+(nowPage+1)+"</a>");	
+			}else{
+				out.println("<a href='index.jsp?nowPage="+(nowPage)+"' class='pagination-link'>"+(nowPage)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(nowPage+1)+"' class='pagination-link is-current'>"+(nowPage+1)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(nowPage+2)+"' class='pagination-link is-current'>"+(nowPage+2)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(nowPage+3)+"' class='pagination-link is-current'>"+(nowPage+3)+"</a>");
+			}
+		}else{ 			
+			if(nowPage!=countPages){
+		
+			out.println("<a href='index.jsp?nowPage="+(nowPage-2)+"' class='pagination-link is-current'>"+(nowPage-2)+"</a>");
+			out.println("<a href='index.jsp?nowPage="+(nowPage-1)+"' class='pagination-link is-current'>"+(nowPage-1)+"</a>");
+		    out.println("<a href='index.jsp?nowPage="+nowPage+"' class='pagination-link'>"+nowPage+"</a>");
+	     	out.println("<a href='index.jsp?nowPage="+(nowPage+1)+"' class='pagination-link is-current'>"+(nowPage+1)+"</a>");
+
+		}else{
+				out.println("<a href='index.jsp?nowPage="+(countPages-3)+"' class='pagination-link is-current '>"+(countPages-3)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(countPages-2)+"' class='pagination-link is-current'>"+(countPages-2)+"</a>");
+				out.println("<a href='index.jsp?nowPage="+(countPages-1)+"' class='pagination-link is-current'>"+(countPages-1)+"</a>");
+		        out.println("<a href='index.jsp?nowPage="+countPages+"' class='pagination-link'>"+countPages+"</a>");		
+		} 
+		} %>
+  
+		    
          	<% if(nowPage!=countPages){
      	out.print("<a class='pagination-next' href='index.jsp?nowPage="+(nowPage+1)+"' >下一页</a>");
 		}
@@ -136,6 +161,7 @@
   %>
  </div>
 </nav>
+s
 <div><hr/></div>
 <!-- 发帖层 -->
 <% if(u!=null){ %>
