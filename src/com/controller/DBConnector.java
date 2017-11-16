@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class DBConnector {
 	private static String driver="com.mysql.jdbc.Driver";
-//	private static String url="jdbc:mysql://127.0.0.1:3306/smartboard?useUnicode=true&characterEncoding=utf8";
 	private static String url="jdbc:mysql://127.0.0.1:3306/smartboard?useUnicode=true&characterEncoding=utf8&useSSL=true";
 	private static String username="smart";
 	private static String password="smart";

@@ -25,11 +25,11 @@
 </script>
 </head>
 <body>
-<div style="float: left" ><a class="button is-primary" href="index.jsp">首页</a></div>
+<div style="float: left"  ><a class="button is-primary" href="index.jsp">首页</a></div>
 <div style="float: right" ><a class="button is-primary" href="signup.jsp">注册</a></div>
 <div style="clear: both"></div>
 <div id="login">
-<h1>登录管理</h1>   
+<h1 >登录管理</h1>   
     <form  name="myform" action="Login" method="post" onsubmit="return validateForm()" >
         <p><input type="text" name="username" id="user" placeholder="用户名" value=""></p>
         <p><input type="password" name="password" id="pwd" placeholder="密码" value=""></p>

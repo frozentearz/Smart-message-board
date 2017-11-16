@@ -42,7 +42,7 @@ body,p,div,ul,li,h1,h2,h3,h4,h5,h6{
 		margin-bottom: 30px;
 	}
 	#submit{
-		width: 232px;
+		width: 100px;
 		height: 30px;
 		background: rgba(0,0,0,.1);
 		border:solid #ccc 1px;
