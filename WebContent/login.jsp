@@ -36,5 +36,10 @@
         <p><input type="submit" id="submit" value="登录" ></p>
     </form>
 </div>
+<!-- 版权层 -->
+<div class="CopyRight" id="CopyRight">
+	<p align="center">版权声明:此网站仅用于学习使用</p>
+	<p align="center">联系我们：<a>frozen_tearz@163.com</a></p>
+</div>
 </body>
 </html>
