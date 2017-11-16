@@ -156,7 +156,7 @@
 <!-- 页码层 -->
 <nav class="pagination" role="navigation" aria-label="pagination">
 <div style="margin: 0 auto" >
-       <script type="text/x-template" id="page">
+	<script type="text/x-template" id="page">
         <ul class="pagination" >
             <li ><a :href="'index.jsp?nowPage='+<%=1%>"class="pagination-previous" >首页</a></li>
             <li v-show="current != 1" @click="current-- && goto(current)" ><a :href="'index.jsp?nowPage='+<%=(nowPage-1)%>" class="pagination-next" >上一页</a></li>
@@ -166,8 +166,8 @@
             <li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a :href="'index.jsp?nowPage='+<%=(nowPage+1)%>" class="pagination-next" >下一页</a></li>
             <li><a :href="'index.jsp?nowPage='+<%=countPages%>" class="pagination-previous" >末页</a></li>
         </ul>
-    </script>
-    <div id="app" class="pagination">
+	</script>
+<div id="app" class="pagination">
           <page></page>
      </div>
  </div>
@@ -240,13 +240,6 @@ var vm = new Vue({
       <div class="level-left">
         <div class="level-item">
           <input class="button is-info" type="submit" value="确定" >
-        </div>
-      </div>
-      <div class="level-right">
-        <div class="level-item">
-          <label class="checkbox">
-            <input type="checkbox"> 按Enter提交
-          </label>
         </div>
       </div>
     </nav>
