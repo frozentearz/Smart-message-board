@@ -297,4 +297,35 @@ public class MessageDAOImpl implements MessageDAO {
 		return countTotal;
 	}
 
+	@Override
+	public int countTotalMessages(int uid) {
+		// TODO Auto-generated method stub
+		Connection conn = DBConnector.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int countTotal=0;
+		String sql="select count(*) from message where creatorID=? group by creatorID; ";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				countTotal=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+		}
+		return countTotal;
+	}
+
 }

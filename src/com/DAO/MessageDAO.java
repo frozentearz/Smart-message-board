@@ -65,4 +65,11 @@ public interface MessageDAO {
 	 * @return 数据库总共的消息数量.
 	 */
 	public int countTotalMessages();
+
+	/**
+	 * 根据用户id统计一下整个数据库一共有多少条消息.
+	 * @return 数据库总共的消息数量.
+	 */
+   public int countTotalMessages(int uid);
+
 }

@@ -59,7 +59,7 @@ public class Update extends HttpServlet {
 		u.setHead(user.getHead());
 		u.setUid(user.getUid());
 		User returnU = factory.UpdateUser(u);
-		System.out.println(returnU);
+		//System.out.println(returnU);
 		if (returnU != null) {
 			session.setAttribute("user", returnU);
 			response.sendRedirect("MyInfo.jsp");

@@ -48,23 +48,6 @@
         color:#fff;
       }
   </style>
-<style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-</style>
 
 </head>
 <body>
@@ -75,7 +58,7 @@
   <!-- Left side -->
   <div class="level-left" style="margin-left: 150px" >
   <figure class='image is-128x128'>
-  <img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" />
+  <a href="index.jsp" ><img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" /></a>
   </figure>
   </div>
   <div style="-webkit-box-align: center;" >
@@ -99,24 +82,29 @@
     </div>
   </div>
 </div>
+
   <!-- Right side -->
 <div class="level-right">
 <% if(u == null) {
     out.print("<p class='level-item'><a class='button is-primary' href='login.jsp'>登录</a></p>");
     out.print("<p class='level-item'><a class='button is-primary' href='signup.jsp'>注册</a></p>");
     } else {
-    out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"' alt='logo' id='img'> </figure><div class='dropdown-content'><p><a href='MyInfo.jsp'>我的信息</a></p><p><a href='#'>我的留言</a></p></div></div>");
+    out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"' alt='logo' id='img'> </figure>");
     out.print("&nbsp;&nbsp;&nbsp;&nbsp;<p class='level-item'><a href='MyInfo.jsp'>"+u.getName()+"</a></p>");
     out.print("<form name='Logout' action='Logout' method='post'><input type='submit' class='button is-primary' placeholder='注销' value='注销'></form>");
 }
 %>
 </div>
 </nav>
+</div>
 <div class="clear"></div>
 
 <!-- 留言层 -->
 <%
-    int countPages=factory.countTotalPages();
+    int countPages=factory.countTotalPages(u.getUid());
+	if(countPages==0){
+		out.print("<div style='width=600px;height=100px'><p align='center'>您没有任何留言</p></div>");
+	}else{
     int nowPage=1;
     String page_s=request.getParameter("nowPage");
     if(page_s!=null){
@@ -152,6 +140,7 @@
     </div>
 </div>
 <%  }
+
 %>
 <!-- 页码层 -->
 <nav class="pagination" role="navigation" aria-label="pagination">
@@ -216,8 +205,8 @@
 var vm = new Vue({
   el:'#app',
 })
-
 </script>
+<% } %>
 <div><hr/></div>
 
 <!-- 版权层 -->

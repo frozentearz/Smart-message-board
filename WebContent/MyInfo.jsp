@@ -20,7 +20,7 @@
   <div class="level-left" style="margin-left: 90px">
     <div class="level-item">
   <figure class='image is-128x128'>
-  <img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" />
+ <a href="index.jsp"> <img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" /></a>
   </figure>
     </div>
   </div>

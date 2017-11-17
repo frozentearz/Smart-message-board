@@ -10,8 +10,8 @@ public class FactoryTest {
 	public static void main(String[] args) {
 		Factory factory=new Factory();
 //		User u = new User();
-		List<Message> list=factory.getMessagesAtPage(0);
+		int num=factory.countTotalMessages(2);
 		
-		System.out.println(list.size());
+		System.out.println(num);
 	}
 }

@@ -11,7 +11,6 @@
 <head>
 <meta charset="UTF-8" />
 <link rel="stylesheet" type="text/css" href="css/bulma.css" />
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 <title>留言板</title>
 <script src="js/vue.js" ></script>
   <style>
@@ -64,6 +63,7 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 </style>
 
 </head>
@@ -75,7 +75,7 @@
   <!-- Left side -->
   <div class="level-left" style="margin-left: 150px" >
   <figure class='image is-128x128'>
-  <img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" />
+  <a href="index.jsp"><img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" /></a>
   </figure>
   </div>
   <div style="-webkit-box-align: center;" >
@@ -225,7 +225,7 @@ var vm = new Vue({
 <form name="message" action="CreateMsg" method="post" >
 <article class="media">
   <figure class="media-left">
-    <p class="image is-64x64">
+    <p class="image is-24x24">
     <%
     	out.print("<img src='"+u.getHead()+"'>");
     %>
@@ -234,7 +234,7 @@ var vm = new Vue({
   <div class="media-content">
     <div class="field">
       <p class="control">
-        <textarea name="message" class="textarea" placeholder="添加留言"></textarea>
+        <textarea name="message" class="textarea" style="resize:none; width:80px; height:20px;"  placeholder="添加留言"></textarea>
       </p>
     </div>
     <nav class="level">

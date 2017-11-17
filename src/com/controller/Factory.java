@@ -75,8 +75,8 @@ public class Factory {
 	 */
 	public User UpdateUser(User user) {
 		User u=userDAO.getUserByUsername(user.getName());
-		System.out.println(u);
-		if(u!=null ) {
+		//System.out.println(u);
+		if(u==null ) {
 			return null;
 		} else {
 			//判断是否添加用户成功
@@ -168,6 +168,14 @@ public class Factory {
 		// TODO
 		return messageDAO.countTotalMessages();
 	}
+	/**
+	 * 根据用户ID统计一下整个数据库一共有多少条消息.
+	 * @return 数据库总共的消息数量.
+	 */
+	public int countTotalMessages(int uid) {
+		// TODO
+		return messageDAO.countTotalMessages(uid);
+	}
 	
 	/**
 	 * 统计一下整个数据库的消息一共可以分成多少页.
@@ -181,4 +189,17 @@ public class Factory {
 			return (countTotalMessages()/10+1);
 	}
 	
+	/**
+	 * 根据用户ID统计一下整个数据库的消息一共可以分成多少页.
+	 * @return 返回总共的页数.
+	 */
+	public int countTotalPages(int uid) {
+	// TODO	
+		
+	if(countTotalMessages(uid)%10==0)
+		return countTotalMessages(uid)/10;
+	else
+		return (countTotalMessages(uid)/10+1);
+	}
+
 }
