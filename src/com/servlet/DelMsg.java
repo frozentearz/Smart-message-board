@@ -2,7 +2,8 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Random;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -15,24 +16,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.controller.Factory;
-import com.models.User;
+import com.models.*;
 
 /**
- * Servlet implementation class Update
+ * Servlet implementation class DelMsg
  */
-@WebServlet("/Update")
-public class Update extends HttpServlet {
+@WebServlet("/DelMsg")
+public class DelMsg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Factory factory;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Update() {
+    public DelMsg() {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
     /**
      * @see Servlet#init(ServletConfig)
      */
@@ -46,28 +47,20 @@ public class Update extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String updateName = new String(request.getParameter("updatename").getBytes("ISO-8859-1"),"UTF-8");
-		String updateSex = new String(request.getParameter("updatesex").getBytes("ISO_8859-1"),"UTF-8");
-		HttpSession session = request.getSession();
-		User user=(User)session.getAttribute("user");
-		request.setCharacterEncoding("UTF-8");
-	    PrintWriter out = response.getWriter();
-		User u = new User();
-		u.setName(updateName);
-		u.setPasswd(user.getPasswd());
-		u.setSex(updateSex);
-		u.setHead(user.getHead());
-		u.setUid(user.getUid());
-		User returnU = factory.UpdateUser(u);
-		//System.out.println(returnU);
-		if (returnU != null) {
-			session.setAttribute("user", returnU);
-			response.sendRedirect("MyInfo.jsp");
-
-		} else {
-			out.print("<script language='javascript'>alert('Update failed');window.location.href='MyInfo.jsp';</script>");
-		}
+		PrintWriter out = response.getWriter();
+		String strid = new String(request.getParameter("Mid").getBytes("ISO-8859-1"),"UTF-8");
+		int mid = Integer.parseInt(strid);
 		
+		List<Message> list = factory.getMessages();
+		for (int i = 0; i < list.size(); i ++) {
+			System.out.println(list.get(i).getMid());
+			if (list.get(i).getMid() == mid) { //如果前台传进来的id值存在于数据库中
+				if(factory.DeleteMessage(mid)) {
+					response.sendRedirect("MyMsg.jsp");
+				} else {
+					out.print("<script language='javascript'>alert('Delete failed!');window.location.href='MyMsg.jsp';</script>");
+				}
+			}
+		}
 	}
-
 }

@@ -55,8 +55,12 @@ public class Register extends HttpServlet {
 		u.setName(name);
 		u.setPasswd(password);
 		u.setSex(sex);
-		int random=(new Random()).nextInt(10)+1;
-		u.setHead("img\\avatar\\avatar_0"+random+".jpg");
+		int random = (new Random()).nextInt(10) + 1;
+		if(random != 10) {
+			u.setHead("img\\avatar\\avatar_0" + random + ".jpg");
+		}else{
+			u.setHead("img\\avatar\\avatar_" + random + ".jpg");
+		}
 		User ReturnU = factory.registerUser(u);
 		System.out.println(ReturnU);
 		if (ReturnU != null) {

@@ -109,9 +109,14 @@ public class Factory {
 			return null;
 	}
 	
+	/**
+	 * 在数据库中查找所有信息.
+	 * @return 这条消息. 如果消息不存在，则返回null.
+	 */
 	public List<Message> getMessages() {
 		return messageDAO.getMessages();
 	}
+	
 	/**
 	 * 在数据库中查找一条信息.
 	 * @param mid 消息的id.
@@ -158,6 +163,15 @@ public class Factory {
 		int offset= n==1 ? 0 : (n-1)*10;
 		int amount = 10;
 		return messageDAO.getMessages(offset,amount );
+	}
+	
+	/**
+	 * 删除一条 message
+	 * @param mid 需要删除message的id.
+	 * @return 是否成功删除
+	 */
+	public boolean DeleteMessage(int mid) {
+		return messageDAO.deleteMessage(mid);
 	}
 	
 	/**

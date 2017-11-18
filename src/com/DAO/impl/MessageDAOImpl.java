@@ -195,6 +195,7 @@ public class MessageDAOImpl implements MessageDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mid);
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

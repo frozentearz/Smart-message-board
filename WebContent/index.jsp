@@ -8,65 +8,65 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" type="text/css" href="css/bulma.css" />
-<title>留言板</title>
-<script src="js/vue.js" ></script>
-  <style>
-  body{
-      font-family:"Segoe UI";
-    }
-    li{
-      list-style:none;
-    }
-    a{
-      text-decoration:none;
-    }
-    .pagination {
-        position: relative;
-
-      }
-      .pagination li{
-        display: inline-block;
-        margin:0 5px;
-      }
-      .pagination li a{
-        padding:.5rem 1rem;
-        display:inline-block;
-        border:1px solid #ddd;
-        background:#fff;
-
-        color:#0E90D2;
-      }
-      .pagination li a:hover{
-        background:#eee;
-      }
-      .pagination li.active a{
-        background:#0E90D2;
-        color:#fff;
-      }
-  </style>
-<style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-</style>
-
-</head>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta http-equiv="charset"  content="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/bulma.css" />
+		<title>留言板</title>
+		<script src="js/vue.js" ></script>
+		<style>
+		  	body{
+		      	font-family:"Segoe UI";
+		    }
+		    li{
+		      	list-style:none;
+		    }
+		    a{
+		     	text-decoration:none;
+		    }
+		    .pagination {
+		        position: relative;
+		    }
+		    .pagination li{
+		        display: inline-block;
+		        margin:0 5px;
+		    }
+		    .pagination li a{
+		    	padding:.5rem 1rem;
+		        display:inline-block;
+		        border:1px solid #ddd;
+		        background:#fff;
+		        color:#0E90D2;
+		    }
+		    .pagination li a:hover{
+		        background:#eee;
+		    }
+		    .pagination li.active a{
+		        background:#0E90D2;
+		        color:#fff;
+		    }
+		</style>
+		<style>
+			img {
+				border-radius:50%;
+			}
+			.dropdown {
+			  position: relative;
+			  display: inline-block;
+			}
+			.dropdown-content {
+			  display: none;
+			  position: absolute;
+			  background-color: #f9f9f9;
+			  min-width: 160px;
+			  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			  padding: 12px 16px;
+			}
+			.dropdown:hover .dropdown-content {
+			  display: block;
+			}
+		</style>
+	</head>
 <body>
 
 <div class="container" style="margin:15px auto;">
@@ -75,7 +75,7 @@
   <!-- Left side -->
   <div class="level-left" style="margin-left: 150px" >
   <figure class='image is-128x128'>
-  <a href="index.jsp"><img src="img\Logo\Logo.PNG" alt="Logo" width="325px" height="260px" /></a>
+  <a href="index.jsp"><img src="img\Logo\LOGO.gif" alt="Logo" width="325px" height="260px" /></a>
   </figure>
   </div>
   <div style="-webkit-box-align: center;" >
@@ -116,25 +116,26 @@
 
 <!-- 留言层 -->
 <%
-	int countPages=factory.countTotalPages();
-	int nowPage=1;
-	String page_s=request.getParameter("nowPage");
-	if(page_s!=null){
-		nowPage=Integer.parseInt(page_s);
+	int countPages = factory.countTotalPages();
+	int nowPage = 1;
+	String page_s = request.getParameter("nowPage");
+	if(page_s != null){
+		nowPage = Integer.parseInt(page_s);
 	}
 	List<Message> message = factory.getMessagesAtPage(nowPage);
-	Message m=new Message();
-	User user=new User();
-	for(int i=0; i<message.size();i++){
-		m=(Message)message.get(i);
-		user=(User)m.getCreator();
+	Message m = new Message();
+	User user = new User();
+	if(message.size() != 0) {
+	for(int i = 0; i < message.size(); i ++){
+		m = (Message)message.get(i);
+		user = (User)m.getCreator();
 		%>
 <div class="clear"></div>
 <div style="-webkit-box-align: center; width:800px;height:100px;margin:auto auto auto auto;">
 <div class="box">
   <article class="media">
     <div class="media-left">
-      <figure class="image is-16x16">
+      <figure class="image is-24x24">
       <%=("<img src='"+user.getHead()+"' alt='Image'>")%>     
       </figure>
     </div>
@@ -155,7 +156,7 @@
 %>
 <!-- 页码层 -->
 <nav class="pagination" role="navigation" aria-label="pagination">
-<div style="margin: 0 auto" >
+<div style="margin: 10px auto" >
 	<script type="text/x-template" id="page">
         <ul class="pagination" >
             <li ><a :href="'index.jsp?nowPage='+<%=1%>"class="pagination-previous" >首页</a></li>
@@ -218,6 +219,12 @@ var vm = new Vue({
 })
 
 </script>
+<% }else {%>
+	<div class="box" style="text-align: center;" >
+	   <p>欢迎来到Smart留言板</p>
+	   <p>目前无任何留言</p>
+	</div>
+<% } %>
 <div><hr/></div>
 <!-- 发帖层 -->
 <% if(u!=null){ %>

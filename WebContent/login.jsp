@@ -3,28 +3,29 @@
 <jsp:useBean id="factory" scope="application" class="com.controller.Factory" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>登录管理</title>
-<link href="css/1.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="css/bulma.css" />
-<script type="text/javascript" language="javascript">
-    function validateForm() {
-    var x = document.myform.username.value;
-     var y = document.myform.password.value;
-    if (x == null || x == "") {
-        alert("需要输入名字。");
-        return false;
-    }
-    if (y == null || y == "") {
-        alert("需要输入密码。");
-        return false;
-    }
-}
-</script>
-</head>
-<body>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta http-equiv="charset"  content="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>登录管理</title>
+		<link href="css/1.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="css/bulma.css" />
+		<script type="text/javascript" language="javascript">
+		    function validateForm() {
+		    var x = document.myform.username.value;
+		     var y = document.myform.password.value;
+		    if (x == null || x == "") {
+		        alert("需要输入名字。");
+		        return false;
+		    }
+		    if (y == null || y == "") {
+		        alert("需要输入密码。");
+		        return false;
+		    }
+		}
+		</script>
+	</head>
+<body style="margin:0;'">
 <div style="float: left"  ><a class="button is-primary" href="index.jsp">首页</a></div>
 <div style="float: right" ><a class="button is-primary" href="signup.jsp">注册</a></div>
 <div style="clear: both"></div>
