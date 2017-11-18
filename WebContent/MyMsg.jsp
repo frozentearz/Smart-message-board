@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="404.jsp"  %>
 <%@ page import="com.models.*,java.util.List,com.controller.Factory" %>
 <jsp:useBean id="factory" scope="application" class="com.controller.Factory" />
 <% 
@@ -85,14 +85,10 @@
 
   <!-- Right side -->
 <div class="level-right">
-<% if(u == null) {
-    out.print("<p class='level-item'><a class='button is-primary' href='login.jsp'>登录</a></p>");
-    out.print("<p class='level-item'><a class='button is-primary' href='signup.jsp'>注册</a></p>");
-    } else {
+<% 
     out.print("<div class='dropdown'><figure class='image is-48x48'> <img src='"+u.getHead()+"' alt='logo' id='img'> </figure>");
     out.print("&nbsp;&nbsp;&nbsp;&nbsp;<p class='level-item'><a href='MyInfo.jsp'>"+u.getName()+"</a></p>");
-    out.print("<form name='Logout' action='Logout' method='post'><input type='submit' class='button is-primary' placeholder='注销' value='注销'></form>");
-}
+    out.print("<p class='level-item'><a class='button is-success' href='index.jsp'>首页</a></p>");
 %>
 </div>
 </nav>

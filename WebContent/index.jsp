@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="404.jsp" %>
 <%@ page import="com.models.*,java.util.List,com.controller.Factory" %>
 <jsp:useBean id="factory" scope="application" class="com.controller.Factory" />
 <% 
@@ -145,7 +145,6 @@
           <small class="tag" style="float:right"><%=m.getCreatetime() %></small>
           <br>
           <% out.print(m.getMessage()); %>
-          <>
           </p>
        </div>
      </div>
