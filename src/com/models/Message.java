@@ -35,6 +35,16 @@ public class Message {
  		String s = sdf.format(createtime);
 		return s;
 	}
+	public Timestamp getCreatetime1() {
+ 		return createtime;
+	}
+	public void setCreatetime(String time) {
+		System.out.println(time+"origin");
+		 System.out.println(time+"set");
+		Timestamp ts = Timestamp.valueOf(time);
+		System.out.println(ts+"t");
+		this.createtime = ts;
+	}
 	public void setCreatetime(Timestamp timestamp) {
 		this.createtime = timestamp;
 	}

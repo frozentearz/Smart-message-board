@@ -228,7 +228,7 @@ var vm = new Vue({
 <div><hr/></div>
 <!-- 发帖层 -->
 <% if(u!=null){ %>
-<form name="message" action="CreateMsg" method="post" >
+<form name="message" action="CreateMsg" method="post" onSubmit="sendTime();" >
 <article class="media">
   <figure class="media-left">
     <p class="image is-24x24">
@@ -246,6 +246,7 @@ var vm = new Vue({
     <nav class="level">
       <div class="level-left">
         <div class="level-item">
+          <input name="time" value="" type="hidden" id="time" style="width:250px" />
           <input class="button is-info" type="submit" value="确定" >
         </div>
       </div>
@@ -258,6 +259,21 @@ var vm = new Vue({
 <%
 }
 %>
+    <script language="javascript">
+      function sendTime(){
+		var newDate=new Date();
+		
+		var year=newDate.getFullYear();
+		var month=(newDate.getMonth()+1)<10?"0"+(newDate.getMonth()+1):newDate.getMonth()+1;
+		var day=newDate.getDate()<10?"0"+newDate.getDate():newDate.getDate();
+		var hours=newDate.getHours()<10?"0"+newDate.getHours():newDate.getHours();
+		var minuts=newDate.getMinutes()<10?"0"+newDate.getMinutes():newDate.getMinutes();
+		var seconds=newDate.getSeconds()<10?"0"+newDate.getSeconds():newDate.getSeconds();
+		var str=year+"-"+month+"-"+day+" "+hours+":"+minuts+":"+seconds;
+		document.getElementById("time").value=str;
+      } 
+    </script>
+</script>
 <!-- 版权层 -->
 <div class="CopyRight" id="CopyRight">
 	<p align="center">版权声明:此网站仅用于学习使用</p>

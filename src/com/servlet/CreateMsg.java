@@ -45,12 +45,13 @@ public class CreateMsg extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String message = new String (request.getParameter("message").getBytes("ISO-8859-1"),"UTF-8");
+		String time = request.getParameter("time");
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
-	
 		Message m = new Message();
 		m.setMessage(message);		
 		m.setCreator(u);
+		m.setCreatetime(time);
 		Message mm = factory.createMessage(m);
 		if(mm != null) {
 			response.sendRedirect("index.jsp");

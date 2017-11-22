@@ -5,6 +5,8 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,8 +75,6 @@ public class MessageDAOImpl implements MessageDAO {
 				m.setMid(rs.getInt(1));
 				m.setMessage(rs.getString("Message"));
 				m.setCreatetime(rs.getTimestamp("createtime"));
-//				m.getCreator().setUid(rs.getInt("creatorId"));
-//				m.setCreatetime(rs.getDate("createTime"));
 				User u=new User();
 				u.setUid(rs.getInt("UID"));
 				u.setName(rs.getString("Uname"));
@@ -105,7 +105,7 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID order by createtime desc ) as m limit ?,?;";
+		String sql="select * from (select m.MID, m.Message,m.createTime,u.UID,u.Uname,u.Uhead from message as m join user as u on creatorId=UID order by MID desc ) as m limit ?,?;";
 		List<Message> list=new ArrayList<Message>();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -147,7 +147,7 @@ public class MessageDAOImpl implements MessageDAO {
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql="select * from (select MID, Message,createtime,UId,Uname,Uhead from message join user on creatorID = UId where UId=? order by createtime desc) as m limit ?,?;";
+		String sql="select * from (select MID, Message,createtime,UId,Uname,Uhead from message join user on creatorID = UId where UId=? order by MID desc) as m limit ?,?;";
 		List<Message> list=new ArrayList<Message>();
 		User u=new User();
 		try {
@@ -245,11 +245,16 @@ public class MessageDAOImpl implements MessageDAO {
 		// TODO Auto-generated method stub
 		Connection conn = DBConnector.getConnection();
 		PreparedStatement pstmt = null;
-		String sql="insert into message(message, createtime, creatorID) values(?,now(),?)";
+		String sql="insert into message(message, createtime, creatorID) values(?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, message.getMessage());
-			pstmt.setInt(2, message.getCreator().getUid()); //这个这样写
+//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			Timestamp ts = Timestamp.valueOf(message.getCreatetime1());
+//		    System.out.println(message.getCreatetime1());
+//			System.out.println(ts);
+			pstmt.setTimestamp(2,message.getCreatetime1());
+			pstmt.setInt(3, message.getCreator().getUid()); //这个这样写
 			if(pstmt.executeUpdate()<0) {
 				return false;
 			}
