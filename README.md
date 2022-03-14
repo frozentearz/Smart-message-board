@@ -1,5 +1,5 @@
 # Smart-message-board
->A simple message board
+>A simple message board. 大学时期第一个CRUD项目^-^
 
 #### 需求分析：
 1. 无管理人员，仅有用户
